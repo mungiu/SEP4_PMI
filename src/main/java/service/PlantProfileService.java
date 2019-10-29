@@ -16,7 +16,6 @@ import java.util.Date;
 
 public class PlantProfileService implements IPlantProfileService
 {
-    private static String DB_NAME;
     private final SimpleDateFormat SDF;
     private IUserService addressService;
     private Connection connection;
@@ -25,7 +24,6 @@ public class PlantProfileService implements IPlantProfileService
         this.SDF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         this.addressService = new UserService();
         this.connection = dbConnection;
-        this.DB_NAME = Database.getDbNameFromConnection(connection);
     }
 
     /**
@@ -40,7 +38,7 @@ public class PlantProfileService implements IPlantProfileService
         PlantProfile plantProfile = null;
 
         Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT * FROM " + DB_NAME + ".order WHERE ID_order = '" + plantProfileID + "';");
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM " + Database.DB_NAME + ".order WHERE ID_order = '" + plantProfileID + "';");
 
         if (resultSet.next())
         {
@@ -141,9 +139,9 @@ public class PlantProfileService implements IPlantProfileService
     public void deletePlantProfile(String plantProfileID) throws SQLException
     {
         Statement statement = connection.createStatement();
-        statement.executeUpdate("DELETE FROM " + DB_NAME + ".takenorders WHERE ID_order = '" + plantProfileID
+        statement.executeUpdate("DELETE FROM " + Database.DB_NAME + ".takenorders WHERE ID_order = '" + plantProfileID
                 + "';");
-        statement.executeUpdate("DELETE FROM " + DB_NAME + ".order WHERE ID_order = '" + plantProfileID + "';");
+        statement.executeUpdate("DELETE FROM " + Database.DB_NAME + ".order WHERE ID_order = '" + plantProfileID + "';");
     }
 
     /**

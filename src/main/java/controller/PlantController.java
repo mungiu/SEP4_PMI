@@ -41,21 +41,21 @@ public class PlantController {
     }
 
     /**
-     * Method triggered by GET request on the endpoint "/client/{clientId}"
+     * Method triggered by GET request on the endpoint "/client/{plantID}"
      * This method and endpoint is accessible to customer and contractor
      *
-     * Requests a specific client object whose clientId was passed in the url parameter
+     * Requests a specific client object whose plantID was passed in the url parameter
      * and returns it as a JSON in an HTTP Response.
      *
-     * @param clientId   clientId of the client to be returned
+     * @param plantID   plantID of the client to be returned
      * @return order
      */
     @GET
-    @Path("/client/{clientId}")
-    public Response getPlantById(@PathParam("clientId") String clientId) {
+    @Path("/plant/{plantID}")
+    public Response getPlantById(@PathParam("plantID") String plantID) {
         try {
-            Plant client = iPlantService.getPlantById(clientId);
-            return Response.status(200).entity(client).build();
+            Plant plant = iPlantService.getPlantById(plantID);
+            return Response.status(200).entity(plant).build();
         } catch (SQLException e) {
             e.printStackTrace();
             return Response.status(500).build();
