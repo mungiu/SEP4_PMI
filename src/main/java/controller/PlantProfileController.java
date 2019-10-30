@@ -2,7 +2,6 @@ package controller;
 
 import model.PlantProfile;
 import model.PlantProfileList;
-import org.json.JSONObject;
 import service.IPlantProfileService;
 import service.PlantProfileService;
 import utils.Database;
@@ -25,18 +24,18 @@ public class PlantProfileController {
      * Method triggered by GET request on the endpoint "/order/{id}"
      * This method and endpoint is accessible to customer and contractor
      *
-     * Requests a specific order whose orderNumber was passed in the url parameter
+     * Requests a specific order whose plantProfileID was passed in the url parameter
      * and returns it as a JSON in an HTTP Response.
      *
-     * @param orderNumber   orderNumber of the order to be returned
+     * @param plantProfileID   plantProfileID of the order to be returned
      * @return order
      */
     @GET
-    @Path("/order/{id}")
-    public Response getPlantProfileById(@PathParam("id") String orderNumber) {
+    @Path("/getPlantProfileById/{plantProfileID}")
+    public Response getPlantProfileById(@PathParam("plantProfileID") String plantProfileID) {
         PlantProfile plantProfile = null;
         try {
-            plantProfile = iPlantProfileService.getPlantProfileById(orderNumber);
+            plantProfile = iPlantProfileService.getPlantProfileById(plantProfileID);
             return Response.status(200).entity(plantProfile).build();
 
         } catch (SQLException e) {
@@ -46,21 +45,21 @@ public class PlantProfileController {
     }
 
     /**
-     * Method triggered by GET request on the endpoint "/myorders/{clientId}"
+     * Method triggered by GET request on the endpoint "/myorders/{userID}"
      * This method and endpoint is only accessible to customer and contractor
      *
-     * Requests a list of all orders assigned to a client whose clientId was passed in the url parameter
+     * Requests a list of all orders assigned to a client whose userID was passed in the url parameter
      * and returns it as a JSON in an HTTP Response.
      *
-     * @param clientId  clientId of the client requesting orders
-     * @return orders   list of orders assigned to a client's clientId
+     * @param userID  userID of the client requesting orders
+     * @return orders   list of orders assigned to a client's userID
      */
     @GET
-    @Path("/myorders/{clientId}")
-    public Response getMyPlantProfiles(@PathParam("clientId") String clientId) {
+    @Path("/getMyPlantProfiles/{userID}")
+    public Response getMyPlantProfiles(@PathParam("userID") String userID) {
         PlantProfileList orders = null;
         try {
-            orders = iPlantProfileService.getMyPlantProfiles(clientId);
+            orders = iPlantProfileService.getMyPlantProfiles(userID);
             return Response.status(200).entity(orders).build();
 
         } catch (SQLException e) {
@@ -78,7 +77,7 @@ public class PlantProfileController {
      * @param plantProfile     order to be added to the system
      */
     @POST
-    @Path("/order")
+    @Path("/createPlantProfile")
     public Response createPlantProfile(PlantProfile plantProfile) {
         try {
             iPlantProfileService.createPlantProfile(plantProfile);
@@ -99,7 +98,7 @@ public class PlantProfileController {
      * @param plantProfile     order to be added to the system
      */
     @POST
-    @Path("/order")
+    @Path("/updatePlantProfile")
     public Response updatePlantProfile(PlantProfile plantProfile) {
         try {
             iPlantProfileService.updatePlantProfile(plantProfile);
@@ -119,9 +118,9 @@ public class PlantProfileController {
      *
      * @param plantProfileID     order to be added to the system
      */
-    @POST
-    @Path("/order")
-    public Response deletePlantProfile(String plantProfileID) {
+    @DELETE
+    @Path("/deletePlantProfile/{plantProfileID}")
+    public Response deletePlantProfile(@PathParam("plantProfileID") String plantProfileID) {
         try {
             iPlantProfileService.deletePlantProfile(plantProfileID);
             return Response.status(200).build();

@@ -19,20 +19,20 @@ public class PlantController {
     public PlantController() { this.iPlantService = new PlantService(Database.getConnection()); }
 
     /**
-     * Method triggered by GET request on the endpoint "/client/{clientId}"
+     * Method triggered by GET request on the endpoint "/client/{userID}"
      * This method and endpoint is accessible to customer and contractor
      *
-     * Requests a specific client object whose clientId was passed in the url parameter
+     * Requests a specific client object whose userID was passed in the url parameter
      * and returns it as a JSON in an HTTP Response.
      *
-     * @param clientId   clientId of the client to be returned
+     * @param userID   userID of the client to be returned
      * @return order
      */
     @GET
-    @Path("/client/{clientId}")
-    public Response getMyPlants(@PathParam("clientId") String clientId) {
+    @Path("/getMyPlants/{userID}")
+    public Response getMyPlants(@PathParam("userID") String userID) {
         try {
-            PlantList client = iPlantService.getMyPlants(clientId);
+            PlantList client = iPlantService.getMyPlants(userID);
             return Response.status(200).entity(client).build();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -51,7 +51,7 @@ public class PlantController {
      * @return order
      */
     @GET
-    @Path("/plant/{plantID}")
+    @Path("/getPlantById/{plantID}")
     public Response getPlantById(@PathParam("plantID") String plantID) {
         try {
             Plant plant = iPlantService.getPlantById(plantID);
@@ -73,7 +73,7 @@ public class PlantController {
      * @return order
      */
     @POST
-    @Path("/client")
+    @Path("/createPlant")
     public Response createPlant(Plant client)
     {
         try {
@@ -96,7 +96,7 @@ public class PlantController {
      * @param plant     order to be added to the system
      */
     @POST
-    @Path("/order")
+    @Path("/updatePlant")
     public Response updatePlant(Plant plant) {
         try {
             iPlantService.updatePlant(plant);
@@ -117,8 +117,8 @@ public class PlantController {
      * @param plantID     order to be added to the system
      */
     @POST
-    @Path("/order")
-    public Response deletePlant(String plantID) {
+    @Path("/deletePlant/{plantID}")
+    public Response deletePlant(@PathParam("plantID") String plantID) {
         try {
             iPlantService.deletePlant(plantID);
             return Response.status(200).build();
