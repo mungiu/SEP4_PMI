@@ -19,6 +19,7 @@ public class PlantProfileService implements IPlantProfileService
     private static String DB_NAME;
     private final SimpleDateFormat SDF;
     private IUserService addressService;
+
     private Connection connection;
 
     public PlantProfileService(Connection dbConnection) {
@@ -29,18 +30,18 @@ public class PlantProfileService implements IPlantProfileService
     }
 
     /**
-     * Queries a database and returns a specific order
+     * Queries a database and returns a PlantProfile
      *
-     * @param plantProfileID   of the order to be returned
-     * @return order
+     * @param    Profile_ID of the PlantProfile to be returned
+     * @return plantProfile
      */
     @Override
-    public PlantProfile getPlantProfileById(String plantProfileID) throws SQLException
+    public PlantProfile getPlantProfileById(String Profile_ID) throws SQLException
     {
         PlantProfile plantProfile = null;
 
         Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT * FROM " + DB_NAME + ".order WHERE ID_order = '" + plantProfileID + "';");
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM " + DB_NAME + ".plantProfile WHERE User_ID = '" + Profile_ID + "';");
 
         if (resultSet.next())
         {
@@ -51,18 +52,17 @@ public class PlantProfileService implements IPlantProfileService
     }
 
     /**
-     * Queries a database and returns an OrderList of all orders related to a client with the clientId passed
+     * Queries a database and returns a ProfileList of all profile related to a user with the User_ID passed
      * in as a parameter. It checks for a clientType and selects a right query to use.
      *
-     * For customer clientType it returns all orders created by a customer
-     * For contractor clientType it returns all orders accepted by a contractor
      *
-     * @return orders
+     * @return profiles
      */
     @Override
-    public PlantProfileList getMyPlantProfiles(String userID) throws SQLException
+    public PlantProfileList getMyPlantProfiles(String User_ID) throws SQLException
     {
-        PlantProfileList orders = new PlantProfileList();
+        PlantProfileList profiles = new PlantProfileList();
+
 //        String clientType = getClientType(clientId);
 //        Statement statement = connection.createStatement();
 //        ResultSet resultSet;
@@ -76,33 +76,33 @@ public class PlantProfileService implements IPlantProfileService
 //
 //        while (resultSet.next())
 //        {
-//            orders.getPlantProfiles().add(populatePlantProfile(resultSet));
+//            profiles.getPlantProfiles().add(populatePlantProfile(resultSet));
 //        }
 //
-        return orders;
+        return profiles;
     }
 
     /**
-     * Insert a new order into a database
+     * Insert a new plantProfile into a database
      *
-     * @param plantProfile     order to be inserted
+     * @param plantProfile   to be inserted
      */
     @Override
     public void createPlantProfile(PlantProfile plantProfile) throws SQLException
     {
-//        Statement statement = connection.createStatement();
-//        statement.executeUpdate("INSERT INTO " + DB_NAME + ".order VALUES (NULL,"/*
-//                + addressService.getUserId(plantProfile.getPickUpUser()) + ","
-//                + addressService.getUserId(plantProfile.getDropOffUser())*/
-//                + "," + plantProfile.getCompanyID()
-//                + ",'" + SDF.format(plantProfile.getPickUpDeadline())
-//                + "','" + SDF.format(plantProfile.getDropOffDeadline())
-//                + "'," + plantProfile.getPrice()
-//                + ",'" + plantProfile.getContentDescription()
-//                + "','" + plantProfile.getSize()
-//                + "'," + plantProfile.getWeight()
-//                + ",'" + plantProfile.getContainerSize()
-//                + "','" + plantProfile.getDistance() + "');");
+        Statement statement = connection.createStatement();
+      /*  statement.executeUpdate("INSERT INTO " + DB_NAME + ".PlantProfile VALUES (NULL,"
+                + addressService.(plantProfile.getPickUpUser()) + ","
+                + addressService.getUserId(plantProfile.getDropOffUser())
+                + "," + plantProfile.getCompanyID()
+                + ",'" + SDF.format(plantProfile.getPickUpDeadline())
+                + "','" + SDF.format(plantProfile.getDropOffDeadline())
+               + "'," + plantProfile.getPrice()
+                + ",'" + plantProfile.getContentDescription()
+                + "','" + plantProfile.getSize()
+                + "'," + plantProfile.getWeight()
+                + ",'" + plantProfile.getContainerSize()
+             + "','" + plantProfile.getDistance() + "');");*/
     }
 
     /**
@@ -133,24 +133,24 @@ public class PlantProfileService implements IPlantProfileService
     }
 
     /**
-     * Deletes an order
+     * Deletes a plant
      *
-     * @param plantProfileID       orderNumber of the order to be deleted
+     * @param Profile_ID       Profile_ID  to be deleted
      */
     @Override
-    public void deletePlantProfile(String plantProfileID) throws SQLException
+    public void deletePlantProfile(String Profile_ID) throws SQLException
     {
         Statement statement = connection.createStatement();
-        statement.executeUpdate("DELETE FROM " + DB_NAME + ".takenorders WHERE ID_order = '" + plantProfileID
+        statement.executeUpdate("DELETE FROM " + DB_NAME + ".PlantProfile WHERE ID_order = '" + Profile_ID
                 + "';");
-        statement.executeUpdate("DELETE FROM " + DB_NAME + ".order WHERE ID_order = '" + plantProfileID + "';");
+        statement.executeUpdate("DELETE FROM " + DB_NAME + ".PlantProfile WHERE ID_order = '" + Profile_ID + "';");
     }
 
     /**
      * Initializes an Order object from the ResultSet and returns it
      *
      * @param resultSet         resultSet from database query
-     * @return order
+     * @return plantProfile
      */
     private PlantProfile populatePlantProfile(ResultSet resultSet) throws SQLException
     {
@@ -165,8 +165,8 @@ public class PlantProfileService implements IPlantProfileService
             System.out.println("Couldn't parse SimpleDateFormat object in GetOrders() method.");
         }
 
-        User pickUpUser = addressService.getUserById(resultSet.getInt("pick_up_address"));
-        User dropOffUser = addressService.getUserById(resultSet.getInt("drop_off_address"));
+     //   User user = addressService.getPlantProfileById(resultSet.getInt("pick_up_address"));
+    //    User dropOffUser = addressService.getUserById(resultSet.getInt("drop_off_address"));
 
         PlantProfile plantProfile = new PlantProfile(
 

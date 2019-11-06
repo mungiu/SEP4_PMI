@@ -25,22 +25,22 @@ public class PlantService implements IPlantService {
     }
 
     /**
-     * Queries a database and returns a specific client
+     * Queries a database and returns a specific plant
      *
-     * @param plantID of the client to be returned
+     * @param Plant_ID of the client to be returned
      * @return client
      */
-    public Plant getPlantById(String plantID) throws SQLException {
-        Plant client = null;
+    public Plant getPlantById(String Plant_ID) throws SQLException {
+        Plant plant = null;
 
         Statement statement = Database.getConnection().createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT * FROM " + DB_NAME + ".clients WHERE ID_client = '" + plantID + "';");
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM " + DB_NAME + ".Users WHERE User_ID = '" + Plant_ID + "';");
 
         if (resultSet.next()) {
-            client = populatePlant(resultSet);
+            plant = populatePlant(resultSet);
         }
 
-        return client;
+        return plant;
     }
 
     /**
@@ -48,16 +48,16 @@ public class PlantService implements IPlantService {
      *
      * @return clients
      */
-    public PlantList getMyPlants(String userID) throws SQLException {
-        PlantList clients = new PlantList();
+    public PlantList getMyPlants(String User_ID) throws SQLException {
+        PlantList plantList = new PlantList();
         Statement statement = Database.getConnection().createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT * FROM " + DB_NAME + ".clients;");
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM " + DB_NAME + ".Users;");
 
         while (resultSet.next()) {
-            clients.getClients().add(populatePlant(resultSet));
+            plantList.getClients().add(populatePlant(resultSet));
         }
 
-        return clients;
+        return plantList;
     }
 
     /**
@@ -88,12 +88,12 @@ public class PlantService implements IPlantService {
     /**
      * Deletes a client
      *
-     * @param plantID clientId of the client to be deleted
+     * @param Plant_ID clientId of the client to be deleted
      */
     @Override
-    public void deletePlant(String plantID) throws SQLException {
+    public void deletePlant(String Plant_ID) throws SQLException {
         Statement statement = Database.getConnection().createStatement();
-        statement.executeUpdate("DELETE FROM " + DB_NAME + ".clients WHERE(ID_client = '" + plantID + "');");
+        statement.executeUpdate("DELETE FROM " + DB_NAME + ".clients WHERE(User_ID = '" + Plant_ID + "');");
     }
 
     /**
@@ -105,10 +105,10 @@ public class PlantService implements IPlantService {
     @Override
     public void updatePlant(Plant plant) throws SQLException {
         Statement statement = Database.getConnection().createStatement();
-        statement.executeUpdate("UPDATE " + DB_NAME + ".clients SET company_name = '"/* + plant.getCompanyName()
+        statement.executeUpdate("UPDATE " + DB_NAME + ".Users SET company_name = '"/* + plant.getCompanyName()
                 + "',ID_address= '" + addressService.getUserId(plant.getUser()) + "',email= '" + plant.getEmail()
                 + "',tel_no='" + plant.getTelephoneNumber()
-                + "',client_type='" + plant.getClientType()*/ + "' WHERE ID_client = " + plant.getUserID() + ";");
+                + "',client_type='" + plant.getClientType()*/ + "' WHERE User_ID = " + plant.getId() + ";");
     }
 }
 

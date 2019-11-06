@@ -36,10 +36,10 @@ public class UserService implements IUserService {
         User user = null;
         if (resultSet.next()) {
             user = new User(
-                    resultSet.getString("street"),
-                    resultSet.getString("city"),
-                    resultSet.getString("postcode"),
-                    resultSet.getString("country")
+                    resultSet.getString("email"),
+                    resultSet.getString("password")
+
+
             );
         }
 

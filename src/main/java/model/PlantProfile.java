@@ -11,7 +11,7 @@ private int id;
 
 
     public PlantProfile() {
-
+id=0;
 
     }
     public PlantProfile(int id) {
