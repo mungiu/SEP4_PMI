@@ -168,7 +168,9 @@ public class PlantProfileService implements IPlantProfileService
         User pickUpUser = addressService.getUserById(resultSet.getInt("pick_up_address"));
         User dropOffUser = addressService.getUserById(resultSet.getInt("drop_off_address"));
 
-        PlantProfile plantProfile = new PlantProfile(/*
+        PlantProfile plantProfile = new PlantProfile(
+
+                /*
                 resultSet.getString("ID_order"),
                 resultSet.getString("ID_company"),
                 pickUpUser,

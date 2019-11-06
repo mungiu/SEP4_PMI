@@ -24,12 +24,12 @@ public class SocketRequest implements Serializable {
         UPDATE_ORDER,
         DELETE_ORDER,
 
-        GET_CUSTOMERS,
-        GET_CONTRACTORS,
-        GET_CLIENT_BY_ID,
-        UPDATE_CLIENT,
-        DELETE_CLIENT,
-        ADD_CLIENT
+        GET_PLANT_PROFILE,
+        GET_PLANT_LIST,
+        GET_PLANT_BY_ID,
+        UPDATE_PLANT,
+        DELETE_PLANT,
+        ADD_PLANT
     }
 
     public ACTION getAction() {

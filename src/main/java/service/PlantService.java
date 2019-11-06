@@ -21,6 +21,7 @@ public class PlantService implements IPlantService {
         this.addressService = new UserService();
         this.connection = dbConnection;
         this.DB_NAME = Database.getDbNameFromConnection(connection);
+
     }
 
     /**
@@ -96,9 +97,10 @@ public class PlantService implements IPlantService {
     }
 
     /**
-     * Updates an existing client with details from client object passed into parameter
+     * Updates an existing plant with details from plant object passed into parameter
      *
-     * @param plant updated client
+     * @param plant updated plant
+     *              sensorID, name, co2, temperature, humidity, light
      */
     @Override
     public void updatePlant(Plant plant) throws SQLException {

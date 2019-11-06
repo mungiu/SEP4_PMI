@@ -31,7 +31,7 @@ public class Database {
      *
      * @return connection
      */
-    private static Connection getNewConnection() {
+    public static Connection getNewConnection() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
