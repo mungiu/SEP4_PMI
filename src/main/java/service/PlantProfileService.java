@@ -13,6 +13,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static utils.Database.DB_NAME;
+
 
 public class PlantProfileService implements IPlantProfileService
 {
@@ -39,11 +41,8 @@ public class PlantProfileService implements IPlantProfileService
         PlantProfile plantProfile = null;
 
         Statement statement = connection.createStatement();
-<<<<<<< HEAD
+
         ResultSet resultSet = statement.executeQuery("SELECT * FROM " + DB_NAME + ".plantProfile WHERE User_ID = '" + Profile_ID + "';");
-=======
-        ResultSet resultSet = statement.executeQuery("SELECT * FROM " + Database.DB_NAME + ".order WHERE ID_order = '" + plantProfileID + "';");
->>>>>>> c360db5228cb9fa6f3db46b5b977e47be404da20
 
         if (resultSet.next())
         {
@@ -143,15 +142,9 @@ public class PlantProfileService implements IPlantProfileService
     public void deletePlantProfile(String Profile_ID) throws SQLException
     {
         Statement statement = connection.createStatement();
-<<<<<<< HEAD
         statement.executeUpdate("DELETE FROM " + DB_NAME + ".PlantProfile WHERE ID_order = '" + Profile_ID
                 + "';");
         statement.executeUpdate("DELETE FROM " + DB_NAME + ".PlantProfile WHERE ID_order = '" + Profile_ID + "';");
-=======
-        statement.executeUpdate("DELETE FROM " + Database.DB_NAME + ".takenorders WHERE ID_order = '" + plantProfileID
-                + "';");
-        statement.executeUpdate("DELETE FROM " + Database.DB_NAME + ".order WHERE ID_order = '" + plantProfileID + "';");
->>>>>>> c360db5228cb9fa6f3db46b5b977e47be404da20
     }
 
     /**
