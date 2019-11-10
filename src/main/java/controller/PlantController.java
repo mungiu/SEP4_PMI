@@ -83,7 +83,7 @@ public class PlantController {
      * todo
      */
     @POST
-    @Path("/plant/{plantID}")
+    @Path("/plants/{plantID}")
     public Response deletePlant(@PathParam("plantID") String plantID) {
         try {
             iPlantService.deletePlant(plantID);
