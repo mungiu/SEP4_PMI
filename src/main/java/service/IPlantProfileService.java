@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 public interface IPlantProfileService {
     PlantProfile getPlantProfileById(String plantProfileID) throws SQLException;
-    PlantProfileList getMyPlantProfiles(String userID) throws SQLException;
+	PlantProfileList getAllPlantProfiles() throws SQLException;
     void createPlantProfile(PlantProfile plantProfile) throws SQLException;
     void updatePlantProfile(PlantProfile plantProfile) throws SQLException;
     void deletePlantProfile(String plantProfileID) throws SQLException;
