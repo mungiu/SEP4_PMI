@@ -82,7 +82,7 @@ public class PlantController {
     /**
      * todo
      */
-    @POST
+    @DELETE
     @Path("/plants/{plantID}")
     public Response deletePlant(@PathParam("plantID") String plantID) {
         try {
