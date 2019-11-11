@@ -10,9 +10,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class PlantService implements IPlantService {
-    // private Connection connection;
 
-    public PlantService(Connection dbConnection) {
+    public PlantService() {
         // this.connection = dbConnection;
     }
 
