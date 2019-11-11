@@ -1,50 +1,57 @@
 package model;
 
+import service.PlantProfileService;
+
+import java.util.ArrayList;
+
 public class User {
 
-    private String street;
-    private String city;
-    private String zipCode;
-    private String country;
+    private String email;
+    private String password;
+    private ArrayList <PlantProfileList> profiles;
+    private ArrayList <PlantList> plants;
+    public User(String email, String city) {
+        profiles=new ArrayList<>();
+        plants=new ArrayList<>();
+        this.email = email;
+        this.password = city;
+
+    }
+    public ArrayList<PlantProfileList> getProfiles() {
+        return profiles;
+    }
+
+    public void setProfiles(ArrayList<PlantProfileList> profiles) {
+        this.profiles = profiles;
+    }
+
+    public ArrayList<PlantList> getPlants() {
+        return plants;
+    }
+
+    public void setPlants(ArrayList<PlantList> plants) {
+        this.plants = plants;
+    }
 
     public User() {}
 
-    public User(String street, String city, String zipCode, String country) {
-        this.street = street;
-        this.city = city;
-        this.zipCode = zipCode;
-        this.country = country;
+
+
+    public String getEmail() {
+        return email;
     }
 
-    public String getStreet() {
-        return street;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public void setStreet(String street) {
-        this.street = street;
+    public String getPassword() {
+        return password;
     }
 
-    public String getCity() {
-        return city;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
 
-    public String getZipCode() {
-        return zipCode;
-    }
-
-    public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
 }

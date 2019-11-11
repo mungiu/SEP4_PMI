@@ -14,4 +14,10 @@ public class PlantProfileList {
     public List<PlantProfile> getPlantProfiles() {
         return plantProfiles;
     }
+    public int size(){
+        return plantProfiles.size();
+    }
+    public void addPlantProfile(PlantProfile profile){
+        plantProfiles.add(profile);
+    }
 }
