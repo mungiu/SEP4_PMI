@@ -8,8 +8,8 @@ import java.sql.SQLException;
 
 public interface IPlantService {
 
-    PlantList getMyPlants(String userID) throws SQLException;
     Plant getPlantById(String plantID) throws SQLException;
+    PlantList getAllPlants() throws SQLException;
     void deletePlant(String plantID) throws  SQLException;
     void updatePlant(Plant plant) throws  SQLException;
     void createPlant(Plant plant) throws SQLException;
