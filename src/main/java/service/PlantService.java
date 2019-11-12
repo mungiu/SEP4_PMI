@@ -9,31 +9,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import dao.PlantDao;
+
 public class PlantService implements IPlantService {
 
-    public PlantService() {
-        // this.connection = dbConnection;
-    }
-
-    /**
-     * todo
-     */
-    @Override
-    public PlantList getAllPlants() throws SQLException {
-        return null;
-    }
-
-    /**
-     * todo
-     */
-    public Plant getPlantById(String plantID) throws SQLException {
-        return null;
-    }
+    private PlantDao dao;
+	
+	public PlantService() {
+		dao = PlantDao.getInstance();
+	}
 
     /**
      * todo
      */
     public void createPlant(Plant plant) throws SQLException {
+    	dao.createPlant(plant);
     }
 
     /**
@@ -41,6 +31,7 @@ public class PlantService implements IPlantService {
      */
     @Override
     public void updatePlant(Plant plant) throws SQLException {
+    	dao.updatePlate(plant);
     }
 
     /**
@@ -48,7 +39,13 @@ public class PlantService implements IPlantService {
      */
     @Override
     public void deletePlant(String plantID) throws SQLException {
+    	dao.deletePlant(plantID);
     }
+
+	@Override
+	public PlantList getAllPlants(String userId) throws SQLException {
+		return dao.getPlants(userId);
+	}
 }
 
 
