@@ -11,6 +11,8 @@ import config.DatabaseData;
 
 public class Database {
 
+
+
 	private static Connection connection;
 	private static Database instance;
 
