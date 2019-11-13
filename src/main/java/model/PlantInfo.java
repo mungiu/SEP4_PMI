@@ -4,61 +4,61 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 public class PlantInfo {
-	private int id;
-	private double value;
-	private String type;
-	private int plantId;
-	private Date dateTime;
+    private int id;
+    private double value;
+    private String name;
+    private int plantId;
+    private Date dateTime;
 
-	public PlantInfo(int id) {
-		this.id = id;
-	}
+    public PlantInfo(int id) {
+        this.id = id;
+    }
 
-	public PlantInfo(int id, double value, String type, int plantId, Date dateTime) {
-		this.id = id;
-		this.value = value;
-		this.type = type;
-		this.plantId = plantId;
-		this.dateTime = dateTime;
-	}
+    public PlantInfo(int id, double value, String name, int plantId, Date dateTime) {
+        this.id = id;
+        this.value = value;
+        this.name = name;
+        this.plantId = plantId;
+        this.dateTime = dateTime;
+    }
 
-	public int getId() {
-		return id;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public double getValue() {
-		return value;
-	}
+    public double getValue() {
+        return value;
+    }
 
-	public void setValue(double value) {
-		this.value = value;
-	}
+    public void setValue(double value) {
+        this.value = value;
+    }
 
-	public String getType() {
-		return type;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setType(String type) {
-		this.type = type;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public int getPlantId() {
-		return plantId;
-	}
+    public int getPlantId() {
+        return plantId;
+    }
 
-	public void setPlantId(int plantId) {
-		this.plantId = plantId;
-	}
+    public void setPlantId(int plantId) {
+        this.plantId = plantId;
+    }
 
-	public Date getDateTime() {
-		return dateTime;
-	}
+    public Date getDateTime() {
+        return dateTime;
+    }
 
-	public void setDateTime(Date dateTime) {
-		this.dateTime = dateTime;
-	}
+    public void setDateTime(Date dateTime) {
+        this.dateTime = dateTime;
+    }
 }

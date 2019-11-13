@@ -9,38 +9,63 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import dao.PlantProfileDao;
 
-public class PlantProfileService implements IPlantProfileService {
+public class PlantProfileService implements IPlantProfileService
+{
+    private Connection connection;
 
-	private PlantProfileDao dao;
-	
-	public PlantProfileService() {
-		dao = PlantProfileDao.getInstance();
-	}
-	
-	@Override
-	public PlantProfileList getAllPlantProfiles(String userId) throws SQLException {
-		return dao.getPlantProfiles(userId);
-	}
+    public PlantProfileService(Connection dbConnection) {
+        this.connection = dbConnection;
+    }
 
+    /**
+     * todo
+     */
+    @Override
+    public PlantProfileList getAllPlantProfiles() throws SQLException {
+        return null;
+    }
 
-	@Override
-	public void createPlantProfile(PlantProfile plantProfile, String userId) throws SQLException {
-		dao.createPlantProfile(plantProfile, userId);
-	}
+    /**
+     * todo
+     */
+    @Override
+    public PlantProfile getPlantProfileById(String plantProfileID) throws SQLException {
+        PlantProfile plantProfile = null;
 
-	
-	@Override
-	public void updatePlantProfile(PlantProfile plantProfile) throws SQLException {
-		dao.updatePlantProfile(plantProfile);
-	}
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("TODO");
 
-	
-	@Override
-	public void deletePlantProfile(String plantProfileID) throws SQLException {
-		dao.deletePlantProfile(plantProfileID);
-	}
+        if (resultSet.next())
+        {
+            // todo: Implement populatePlantProfile
+            // plantProfile = populatePlantProfile(resultSet);
+        }
 
-	
+        return plantProfile;
+    }
+
+    /**
+     * todo
+     */
+    @Override
+    public void createPlantProfile(PlantProfile plantProfile) throws SQLException {
+    }
+
+    /**
+     * todo
+     */
+    @Override
+    public void updatePlantProfile(PlantProfile plantProfileObj) throws SQLException {
+    }
+
+    /**
+     * todo
+     */
+    @Override
+    public void deletePlantProfile(String plantProfileID) throws SQLException
+    {
+        Statement statement = connection.createStatement();
+        statement.executeUpdate("TODO");
+    }
 }
