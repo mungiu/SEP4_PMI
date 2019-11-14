@@ -10,5 +10,5 @@ public interface IPlantProfileService {
 	PlantProfileList getAllPlantProfiles(String userId) throws SQLException;
     void updatePlantProfile(PlantProfile plantProfile) throws SQLException;
     void deletePlantProfile(String plantProfileID) throws SQLException;
-	void createPlantProfile(PlantProfile plantProfile, String userId) throws SQLException;
+	void createPlantProfile(PlantProfile plantProfile) throws SQLException;
 }
