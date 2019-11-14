@@ -26,8 +26,8 @@ public class PlantProfileService implements IPlantProfileService {
 
 
 	@Override
-	public void createPlantProfile(PlantProfile plantProfile, String userId) throws SQLException {
-		dao.createPlantProfile(plantProfile, userId);
+	public void createPlantProfile(PlantProfile plantProfile) throws SQLException {
+		dao.createPlantProfile(plantProfile);
 	}
 
 	

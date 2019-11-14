@@ -25,7 +25,7 @@ public class PlantProfileController {
 	 */
 	@GET
 	@Path("/plantprofiles/{userID}")
-	public Response getAllPlantProfiles(String userId) {
+	public Response getMyPlantProfiles(String userId) {
 		PlantProfileList plantProfiles = null;
 		try {
 			plantProfiles = iPlantProfileService.getAllPlantProfiles(userId);
@@ -40,10 +40,10 @@ public class PlantProfileController {
 	 * todo
 	 */
 	@POST
-	@Path("/plantprofiles/{userID}")
-	public Response createPlantProfile(PlantProfile plantProfile, String userId) {
+	@Path("/plantprofiles")
+	public Response createPlantProfile(PlantProfile plantProfile) {
 		try {
-			iPlantProfileService.createPlantProfile(plantProfile, userId);
+			iPlantProfileService.createPlantProfile(plantProfile);
 			return Response.status(200).build();
 		} catch (SQLException e) {
 			e.printStackTrace();

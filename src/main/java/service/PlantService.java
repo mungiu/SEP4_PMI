@@ -14,10 +14,21 @@ import dao.PlantDao;
 public class PlantService implements IPlantService {
 
     private PlantDao dao;
-	
+
 	public PlantService() {
 		dao = PlantDao.getInstance();
 	}
+
+    /**
+     * todo
+     * @param plantID
+     * @return
+     * @throws SQLException
+     */
+    @Override
+    public Plant getPlantById(String plantID) throws SQLException {
+        return dao.getPlantById(plantID);
+    }
 
     /**
      * todo
@@ -46,6 +57,7 @@ public class PlantService implements IPlantService {
 	public PlantList getAllPlants(String userId) throws SQLException {
 		return dao.getPlants(userId);
 	}
+
 }
 
 

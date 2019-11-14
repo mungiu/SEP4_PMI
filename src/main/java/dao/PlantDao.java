@@ -46,4 +46,9 @@ public class PlantDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+    public Plant getPlantById(String plantID) {
+		// TODO
+		return null;
+    }
 }

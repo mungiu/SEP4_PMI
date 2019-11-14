@@ -23,15 +23,36 @@ public class PlantController {
 		this.iPlantService = new PlantService();
 	}
 
+	@GET
+	@Path("/test")
+	public Response test(){
+		return Response.status(200).entity("Hello").build();
+	}
+
 	/**
 	 * todo
 	 */
 	@GET
-	@Path("/plants/{UserID}")
-	public Response getAllPlants(String userId) {
+	@Path("/plants/{userID}")
+	public Response getMyPlants(String userId) {
 		try {
 			PlantList plants = iPlantService.getAllPlants(userId);
 			return Response.status(200).entity(plants).build();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return Response.status(500).build();
+		}
+	}
+
+	/**
+	 * todo
+	 */
+	@GET
+	@Path("/plants/{plantID}")
+	public Response getPlantById(@PathParam("plantID") String plantID) {
+		try {
+			Plant plant = iPlantService.getPlantById(plantID);
+			return Response.status(200).entity(plant).build();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return Response.status(500).build();
