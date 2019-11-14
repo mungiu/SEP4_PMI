@@ -8,5 +8,5 @@ import javax.ws.rs.core.Application;
  *
  * Don't touch it unless you know what you're doing!
  */
-@ApplicationPath("/root")
+@ApplicationPath("/")
 public class JAXActivator extends Application {}

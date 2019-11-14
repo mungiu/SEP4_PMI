@@ -23,6 +23,12 @@ public class PlantController {
 		this.iPlantService = new PlantService();
 	}
 
+	@GET
+	@Path("/test")
+	public Response test(){
+		return Response.status(200).entity("Hello").build();
+	}
+
 	/**
 	 * todo
 	 */
