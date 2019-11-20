@@ -7,8 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public interface IPlantService {
-
-    PlantList getAllPlants(String userId) throws SQLException;
     Plant getPlantById(String plantID) throws SQLException;
     void deletePlant(String plantID) throws  SQLException;
     void updatePlant(Plant plant) throws  SQLException;

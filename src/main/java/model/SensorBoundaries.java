@@ -25,4 +25,13 @@ public class SensorBoundaries {
 	public Double getMin() {
 		return min;
 	}
+
+	public boolean isValid(){
+		if(min<max){
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 }
