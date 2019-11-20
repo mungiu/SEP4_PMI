@@ -5,23 +5,27 @@ import java.util.List;
 
 public class PlantList
 {
-    private List<Plant> plants;
+    private List<IPlant> plants;
 
     public PlantList() {
         plants = new ArrayList<>();
     }
 
-    public List<Plant> getClients() {
+    public PlantList(List<IPlant> plants){
+        this.plants = plants;
+    }
+
+    public List<IPlant> getClients() {
         return plants;
     }
-    public Plant getPlant(int index){
+    public IPlant getPlant(int index){
         return plants.get(index);
     }
     public int size(){
         return plants.size();
 
     }
-    public void addPlant(Plant plant){
+    public void addPlant(IPlant plant){
         plants.add(plant);
     }
 }

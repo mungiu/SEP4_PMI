@@ -1,5 +1,9 @@
 package service;
 
+import dao.PlantDao;
+import dao.PlantProfileDao;
+import dao.UserDao;
+import model.Plant;
 import model.User;
 import utils.Database;
 
@@ -10,8 +14,14 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 
 public class UserService implements IUserService {
+    public PlantDao plantDao;
+    public PlantProfileDao plantProfileDao;
+    public UserDao userDao;
 
     public UserService() {
+        plantDao = new PlantDao();
+        plantProfileDao = new PlantProfileDao();
+        userDao = new UserDao();
     }
 
     /**
@@ -20,8 +30,8 @@ public class UserService implements IUserService {
      * @param userID of the address to be returned
      * @return address
      */
-    public User getUserById(int userID) throws SQLException {
-        return null;
+    public User getUserById(String userID) throws SQLException {
+return null;
     }
 
     @Override

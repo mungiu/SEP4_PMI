@@ -4,19 +4,21 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
 
-public class PlantProfile {
+public class PlantProfile implements IPlantProfile{
 	private int id;
 	private String name;
+	private IUser user;
 	private SensorBoundaries co2, temperature, humidity, light;
 
 	public PlantProfile() {
 	}
 
-	public PlantProfile(int id, String name, SensorBoundaries co2, SensorBoundaries temperature,
+	public PlantProfile(int id, String name, IUser user, SensorBoundaries co2, SensorBoundaries temperature,
 			SensorBoundaries humidity, SensorBoundaries light) {
 		super();
 		this.id = id;
 		this.name = name;
+		this.user = user;
 		this.co2 = co2;
 		this.temperature = temperature;
 		this.humidity = humidity;
@@ -39,6 +41,16 @@ public class PlantProfile {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@Override
+	public void setUser(IUser user) {
+		this.user = user;
+	}
+
+	@Override
+	public IUser getUser() {
+		return user;
 	}
 
 	public SensorBoundaries getCo2() {

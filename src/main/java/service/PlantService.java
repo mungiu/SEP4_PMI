@@ -16,7 +16,7 @@ public class PlantService implements IPlantService {
     private PlantDao dao;
 
 	public PlantService() {
-		dao = PlantDao.getInstance();
+		dao = new PlantDao();
 	}
 
     /**
@@ -53,10 +53,6 @@ public class PlantService implements IPlantService {
     	dao.deletePlant(plantID);
     }
 
-	@Override
-	public PlantList getAllPlants(String userId) throws SQLException {
-		return dao.getPlants(userId);
-	}
 
 }
 
