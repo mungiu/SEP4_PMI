@@ -4,7 +4,7 @@ import service.PlantProfileService;
 
 import java.util.ArrayList;
 
-public class User {
+public class User implements IUser{
 
 	private String email;
 	private String password;

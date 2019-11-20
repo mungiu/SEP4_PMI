@@ -8,19 +8,12 @@ import utils.Database;
 import utils.Queries;
 
 public class PlantDao {
-	private static PlantDao instance;
 	private Database db;
 	
-	private PlantDao() {
+	public PlantDao() {
 		db = Database.getInstance();
 	}
-	
-	public static PlantDao getInstance() {
-		if(instance == null) {
-			instance = new PlantDao();
-		}
-		return instance;
-	}
+
 	
 	public void createPlant(Plant plant) throws SQLException{
 		try { 

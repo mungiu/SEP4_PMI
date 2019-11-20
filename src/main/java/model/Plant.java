@@ -9,14 +9,65 @@ import java.sql.SQLException;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "clientType")
 
-public class Plant {
+public class Plant implements IPlant{
 
 	private int id;
 	private String name;
-	private PlantProfile profile;
+	private IPlantProfile profile;
+	private PlantData co2, humidity, temperature, light;
+
+	@Override
+	public PlantData getCo2() {
+		return co2;
+	}
+
+	@Override
+	public void setCo2(PlantData co2) {
+		this.co2 = co2;
+	}
+
+	@Override
+	public PlantData getHumidity() {
+		return humidity;
+	}
+
+	@Override
+	public void setHumidity(PlantData humidity) {
+		this.humidity = humidity;
+	}
+
+	@Override
+	public PlantData getTemperature() {
+		return temperature;
+	}
+
+	@Override
+	public void setTemperature(PlantData temperature) {
+		this.temperature = temperature;
+	}
+
+	@Override
+	public PlantData getLight() {
+		return light;
+	}
+
+	@Override
+	public void setLight(PlantData light) {
+		this.light = light;
+	}
 
 	public Plant() {
 
+	}
+
+	public Plant(int id, String name, PlantProfile profile, PlantData co2, PlantData temperature, PlantData humidity, PlantData light) {
+		this.id = id;
+		this.name = name;
+		this.profile = profile;
+		this.co2 = co2;
+		this.temperature = temperature;
+		this.humidity = humidity;
+		this.light = light;
 	}
 
 	public Plant(int id, String name, PlantProfile profile) {
@@ -41,11 +92,11 @@ public class Plant {
 		this.name = name;
 	}
 
-	public PlantProfile getProfile() {
+	public IPlantProfile getProfile() {
 		return profile;
 	}
 
-	public void setProfile(PlantProfile profile) {
+	public void setProfile(IPlantProfile profile) {
 		this.profile = profile;
 	}
 

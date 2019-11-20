@@ -3,24 +3,31 @@ package model;
 import java.time.LocalDateTime;
 import java.util.Date;
 
-public class PlantInfo {
+public class PlantData {
 	private int id;
 	private double value;
 	private String type;
 	private int plantId;
 	private Date dateTime;
 
-	public PlantInfo(int id) {
+	public PlantData(int id) {
 		this.id = id;
 	}
 
-	public PlantInfo(int id, double value, String type, int plantId, Date dateTime) {
+	public PlantData(int id, double value, String type, int plantId, Date dateTime) {
 		this.id = id;
 		this.value = value;
 		this.type = type;
 		this.plantId = plantId;
 		this.dateTime = dateTime;
 	}
+
+    public PlantData(double value, String type, int plantId, Date dateTime) {
+        this.value = value;
+        this.type = type;
+        this.plantId = plantId;
+        this.dateTime = dateTime;
+    }
 
 	public int getId() {
 		return id;

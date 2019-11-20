@@ -16,7 +16,7 @@ public class PlantService implements IPlantService {
     private PlantDao dao;
 
 	public PlantService() {
-		dao = PlantDao.getInstance();
+		dao = new PlantDao();
 	}
 
     /**

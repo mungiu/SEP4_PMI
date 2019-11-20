@@ -16,7 +16,7 @@ public class PlantProfileService implements IPlantProfileService {
 	private PlantProfileDao dao;
 	
 	public PlantProfileService() {
-		dao = PlantProfileDao.getInstance();
+		dao = new PlantProfileDao();
 	}
 	
 	@Override
@@ -30,7 +30,12 @@ public class PlantProfileService implements IPlantProfileService {
 		dao.createPlantProfile(plantProfile);
 	}
 
-	
+	@Override
+	public PlantProfile getPlantProfileById(String plantID) throws SQLException {
+		return dao.getPlantProfileById(plantID);
+	}
+
+
 	@Override
 	public void updatePlantProfile(PlantProfile plantProfile) throws SQLException {
 		dao.updatePlantProfile(plantProfile);

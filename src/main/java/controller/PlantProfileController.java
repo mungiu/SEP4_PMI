@@ -29,10 +29,27 @@ public class PlantProfileController {
 		PlantProfileList plantProfiles = null;
 		try {
 			plantProfiles = iPlantProfileService.getAllPlantProfiles(userId);
-			return Response.status(200).entity(plantProfiles).build();
+//			return Response.status(200).entity(plantProfiles).build();
+			return Response.status(200).entity("Hello World").build();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return Response.status(500).entity(e).build();
+		}
+	}
+
+	/**
+	 * todo
+	 */
+	@GET
+	@Path("/plantprofiles/{plantProfileID}")
+	public Response getPlantProfileById(@PathParam("plantProfileID") String plantID) {
+		try {
+			PlantProfile plant = iPlantProfileService.getPlantProfileById(plantID);
+//			return Response.status(200).entity(plant).build();
+			return Response.status(200).entity("Hello World 3").build();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return Response.status(500).build();
 		}
 	}
 
