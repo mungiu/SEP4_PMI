@@ -3,15 +3,13 @@ package service;
 import dao.PlantDao;
 import dao.PlantProfileDao;
 import dao.UserDao;
-import model.Plant;
+import model.IUser;
+import model.PlantList;
+import model.PlantProfileList;
 import model.User;
-import utils.Database;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.text.SimpleDateFormat;
+import java.text.ParseException;
 
 public class UserService implements IUserService {
     public PlantDao plantDao;
@@ -24,14 +22,30 @@ public class UserService implements IUserService {
         userDao = new UserDao();
     }
 
+    public void instanciateDaoIfNull(){
+        if(plantProfileDao == null){
+            plantProfileDao = new PlantProfileDao();
+        }
+        if(plantDao == null){
+            plantDao = new PlantDao();
+        }
+        if(userDao == null){
+            userDao = new UserDao();
+        }
+    }
+
     /**
      * Queries a database and returns a specific address
      *
      * @param userID of the address to be returned
      * @return address
      */
-    public User getUserById(String userID) throws SQLException {
-return null;
+    public IUser getUserById(String userID) throws SQLException, ParseException {
+        instanciateDaoIfNull();
+        PlantProfileList profileList = plantProfileDao.getPlantProfiles(userID);
+        PlantList plantList = plantDao.getPlants(userID);
+        IUser user = new User(userID, profileList, plantList);
+        return user;
     }
 
     @Override
@@ -40,12 +54,12 @@ return null;
     }
 
     @Override
-    public void updateUser(User user) throws SQLException {
+    public void updateUser(IUser user) throws SQLException {
         // TODO
     }
 
     @Override
-    public void createUser(User plant) throws SQLException {
+    public void createUser(IUser plant) throws SQLException {
         // TODO
     }
 }

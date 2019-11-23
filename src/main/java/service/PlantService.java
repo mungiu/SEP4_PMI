@@ -1,15 +1,9 @@
 package service;
 
-import model.Plant;
-import model.PlantList;
-import utils.Database;
-
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
 import dao.PlantDao;
+import model.IPlant;
+
+import java.sql.SQLException;
 
 public class PlantService implements IPlantService {
 
@@ -26,14 +20,14 @@ public class PlantService implements IPlantService {
      * @throws SQLException
      */
     @Override
-    public Plant getPlantById(String plantID) throws SQLException {
+    public IPlant getPlantById(String plantID) throws SQLException {
         return dao.getPlantById(plantID);
     }
 
     /**
      * todo
      */
-    public void createPlant(Plant plant) throws SQLException {
+    public void createPlant(IPlant plant) throws SQLException {
     	dao.createPlant(plant);
     }
 
@@ -41,8 +35,8 @@ public class PlantService implements IPlantService {
      * todo
      */
     @Override
-    public void updatePlant(Plant plant) throws SQLException {
-    	dao.updatePlate(plant);
+    public void updatePlant(IPlant plant) throws SQLException {
+    	dao.updatePlant(plant);
     }
 
     /**

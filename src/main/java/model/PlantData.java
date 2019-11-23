@@ -14,6 +14,10 @@ public class PlantData {
 		this.id = id;
 	}
 
+	public PlantData() {
+
+	}
+
 	public PlantData(int id, double value, String type, int plantId, Date dateTime) {
 		this.id = id;
 		this.value = value;

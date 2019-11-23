@@ -1,12 +1,13 @@
 package service;
 
-import model.User;
+import model.IUser;
 
 import java.sql.SQLException;
+import java.text.ParseException;
 
 public interface IUserService {
-    User getUserById(String userID) throws SQLException;
+    IUser getUserById(String userID) throws SQLException, ParseException;
     void deleteUser(String userID) throws  SQLException;
-    void updateUser(User user) throws  SQLException;
-    void createUser(User user) throws SQLException;
+    void updateUser(IUser user) throws  SQLException;
+    void createUser(IUser user) throws SQLException;
 }

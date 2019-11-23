@@ -10,6 +10,10 @@ public interface IPlant {
 
     void setName(String name);
 
+    IPlantProfile getProfile();
+
+    void setProfile(IPlantProfile plantProfile);
+
     PlantData getCo2();
 
     void setCo2(PlantData data);

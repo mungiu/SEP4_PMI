@@ -1,21 +1,29 @@
 package utils;
 
-import model.Plant;
-import model.PlantProfile;
-
-import java.sql.SQLException;
-import java.util.ArrayList;
-
 public class Queries {
 
-	private Database db;
+	public static final String GET_PLANTS_BY_USER_ID = "SELECT p.Plant_ID, p.Profile_ID, p.PlantName,\n" +
+			"       PP.Profile_Name, PP.CO2_Max, PP.CO2_Min,\n" +
+			"       PP.Hum_Max, PP.Hum_Min,\n" +
+			"       PP.Tem_Max, PP.Tem_Min,\n" +
+			"       PP.Light_Max, PP.Light_Min,\n" +
+			"       PP.User_ID \n" +
+			//"       PD.ID, PD.Sensor_Type, PD.Sensor_Value, PD.TimeStamp\n" +
+			//"from dbo.Plant p left join dbo.PlantData PD on p.Plant_ID = PD.Plant_ID\n" +
+			"from dbo.Plant p left join dbo.PlantProfile PP on p.Profile_ID = PP.Profile_ID\n" +
+			"WHERE User_ID = ?;";
 
-	public static final String GET_PLANTS_BY_USER_ID = "select Plant_ID, p.Profile_ID , PlantName from SEP4_PMI.Plant p join SEP4_PMI.PlantProfile pp on p.Profile_ID = pp.Profile_ID where User_ID = ?;";
-	public static final String CREATE_PLANT = "insert into SEP4_PMI.Plant(Profile_ID, PlantName) values (?,?);";
+	public static final String GET_PLANT_DATA_BY_TYPE_AND_PLANT_ID = "select top 1 PD.id, PD.sensor_type, PD.sensor_value, PD.timestamp from PlantData PD where PD.Sensor_Type = ? AND PD.Plant_ID = ? ORDER BY PD.TimeStamp DESC;";
+	public static final String CREATE_PLANT = "insert into dbo.Plant(Profile_ID, PlantName) values (?,?);";
 	public static final String UPDATE_PLANT = "update SEP4_PMI.Plant set Plant_ID = ?, Profile_ID = ?, PlantName = ? where Plant_ID = ?;";
 	public static final String DELETE_PLANT = "delete from SEP4_PMI.Plant where Plant_ID = ?;";
 
-	public static final String GET_PLANT_PROFILES /*suggestion - refactor String name to be mere explicit: ..._BY_USER*/= "select * from SEP4_PMI.PlantProfile where user_ID = ?;";
+	public static final String GET_PLANT_PROFILES = "select PP.Profile_Id, PP.Profile_Name, "+
+	"PP.CO2_Max, PP.CO2_Min, "+
+	"PP.Hum_Max, PP.Hum_Min, "+
+	"PP.Tem_Max, PP.Tem_Min, "+
+	"PP.Light_Max, PP.Light_Min "+
+	"from dbo.PlantProfile PP where user_ID = ?;";
 	public static final String CREATE_PLANT_PROFILE = "insert into SEP4_PMI.PlantProfile (User_ID, Profile_Name, CO2_Max, CO2_Min, Hum_Max, Hum_Min, Tem_Max, Tem_Min, Light_Max, Light_Min) values (?,?,?,?,?,?,?,?,?,?);";
 	public static final String UPDATE_PLANT_PROFILE = "update SEP4_PMI.PlantProfile set User_ID = ?, Profile_Name = ?, CO2_Max = ?, CO2_Min = ?, Hum_Max = ?, Hum_Min = ?, Tem_Max = ?, Tem_Min = ?, Light_Max = ?, Light_Min = ? where Profile_ID = ?;";
 	public static final String DELETE_PLANT_PROFILE = "delete from SEP4_PMI.PlantProfile where Profile_ID = ?;";
@@ -30,7 +38,7 @@ public class Queries {
 	public static final String UPDATE_PLANTINFO = "update SEP4_PMI.PlantInfo set ID = ?, Plant_ID = ?, Sensor_Type  = ?, Sensor_Value = ?, TimeStamp = ? where Plant_ID = ?;";
 	public static final String DELETE_PLANTINFO = "delete from SEP4_PMI.PlantInfo where ID = ?;";
 
-	public Queries(){
+	/*public Queries(){
 		db = Database.getInstance();
 	}
 
@@ -49,16 +57,16 @@ public class Queries {
 			}
 			try {
 
-				/*create table Plant (
+				*//*create table Plant (
 						Plant_ID int identity (1,1) not null primary key,
 				Profile_ID int not null,
 						PlantName varchar(50) null
-				foreign key ("Profile_ID")   references dbo.PlantProfile ("Profile_ID")*/
+				foreign key ("Profile_ID")   references dbo.PlantProfile ("Profile_ID")*//*
 
 				PlantProfile temp_plantProfile = new PlantProfile();
 				temp_plantProfile.setId((int)row[2]);
 
-				temp = new Plant((int)row[0]/*int id*/, (String)row[1]/*String name*/, temp_plantProfile /*PlantProfile profile*/);
+				temp = new Plant((int)row[0]*//*int id*//*, (String)row[1]*//*String name*//*, temp_plantProfile *//*PlantProfile profile*//*);
 
 				list.add(temp);
 			} catch (NumberFormatException e) {
@@ -71,6 +79,6 @@ public class Queries {
 
 		}
 		return list;
-	}
+	}*/
 
 }

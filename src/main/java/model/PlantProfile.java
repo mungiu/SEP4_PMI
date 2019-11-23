@@ -25,6 +25,16 @@ public class PlantProfile implements IPlantProfile{
 		this.light = light;
 	}
 
+	public PlantProfile(String name, IUser user, SensorBoundaries co2, SensorBoundaries temperature,
+						SensorBoundaries humidity, SensorBoundaries light) {
+		super();
+		this.name = name;
+		this.user = user;
+		this.co2 = co2;
+		this.temperature = temperature;
+		this.humidity = humidity;
+		this.light = light;
+	}
 
 
 	public int getId() {

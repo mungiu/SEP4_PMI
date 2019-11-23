@@ -1,10 +1,8 @@
 package controller;
 
 import model.PlantProfile;
-import model.PlantProfileList;
 import service.IPlantProfileService;
 import service.PlantProfileService;
-import utils.Database;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
@@ -23,7 +21,7 @@ public class PlantProfileController {
 	/**
 	 * todo
 	 */
-	@GET
+	/*@GET
 	@Path("/plantprofiles/{userID}")
 	public Response getMyPlantProfiles(String userId) {
 		PlantProfileList plantProfiles = null;
@@ -35,7 +33,7 @@ public class PlantProfileController {
 			e.printStackTrace();
 			return Response.status(500).entity(e).build();
 		}
-	}
+	}*/
 
 	/**
 	 * todo
