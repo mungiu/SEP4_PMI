@@ -60,7 +60,7 @@ public class Plant implements IPlant{
 
 	}
 
-	public Plant(int id, String name, PlantProfile profile, PlantData co2, PlantData temperature, PlantData humidity, PlantData light) {
+	public Plant(int id, String name, IPlantProfile profile, PlantData co2, PlantData temperature, PlantData humidity, PlantData light) {
 		this.id = id;
 		this.name = name;
 		this.profile = profile;
@@ -70,7 +70,12 @@ public class Plant implements IPlant{
 		this.light = light;
 	}
 
-	public Plant(int id, String name, PlantProfile profile) {
+	public Plant(String name, IPlantProfile profile) {
+		this.name = name;
+		this.profile = profile;
+	}
+
+	public Plant(int id, String name, IPlantProfile profile) {
 		this.id = id;
 		this.name = name;
 		this.profile = profile;
