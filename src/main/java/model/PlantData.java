@@ -1,12 +1,11 @@
 package model;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 
 public class PlantData {
 	private int id;
 	private double value;
-	private String type;
+	private SensorDataTypes type;
 	private int plantId;
 	private Date dateTime;
 
@@ -18,7 +17,7 @@ public class PlantData {
 
 	}
 
-	public PlantData(int id, double value, String type, int plantId, Date dateTime) {
+	public PlantData(int id, double value, SensorDataTypes type, int plantId, Date dateTime) {
 		this.id = id;
 		this.value = value;
 		this.type = type;
@@ -26,7 +25,7 @@ public class PlantData {
 		this.dateTime = dateTime;
 	}
 
-    public PlantData(double value, String type, int plantId, Date dateTime) {
+    public PlantData(double value, SensorDataTypes type, int plantId, Date dateTime) {
         this.value = value;
         this.type = type;
         this.plantId = plantId;
@@ -49,11 +48,11 @@ public class PlantData {
 		this.value = value;
 	}
 
-	public String getType() {
+	public SensorDataTypes getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(SensorDataTypes type) {
 		this.type = type;
 	}
 
