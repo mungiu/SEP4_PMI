@@ -8,9 +8,9 @@ public interface IPlantProfile {
 
     void setName(String name);
 
-    void setUser(IUser user);
+    void setUserEmail(String userEmail);
 
-    IUser getUser();
+    String getUserEmail();
 
     void setCo2(SensorBoundaries boundaries);
 

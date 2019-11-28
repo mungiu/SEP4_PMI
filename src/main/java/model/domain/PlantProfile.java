@@ -3,27 +3,27 @@ package model;
 public class PlantProfile implements IPlantProfile{
 	private int id;
 	private String name;
-	private IUser user;
+	private String userEmail;
 	private SensorBoundaries co2, temperature, humidity, light;
 
 	public PlantProfile() {
 	}
 
-	public PlantProfile(int id, String name, IUser user, SensorBoundaries co2, SensorBoundaries temperature,
-			SensorBoundaries humidity, SensorBoundaries light) {
+	public PlantProfile(int id, String name, String userEmail, SensorBoundaries co2, SensorBoundaries temperature,
+						SensorBoundaries humidity, SensorBoundaries light) {
 		this.id = id;
 		this.name = name;
-		this.user = user;
+		this.userEmail = userEmail;
 		this.co2 = co2;
 		this.temperature = temperature;
 		this.humidity = humidity;
 		this.light = light;
 	}
 
-	public PlantProfile(String name, IUser user, SensorBoundaries co2, SensorBoundaries temperature,
+	public PlantProfile(String name, String userEmail, SensorBoundaries co2, SensorBoundaries temperature,
 						SensorBoundaries humidity, SensorBoundaries light) {
 		this.name = name;
-		this.user = user;
+		this.userEmail = userEmail;
 		this.co2 = co2;
 		this.temperature = temperature;
 		this.humidity = humidity;
@@ -46,13 +46,13 @@ public class PlantProfile implements IPlantProfile{
 	}
 
 	@Override
-	public void setUser(IUser user) {
-		this.user = user;
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
 	}
 
 	@Override
-	public IUser getUser() {
-		return user;
+	public String getUserEmail() {
+		return userEmail;
 	}
 
 	@Override
