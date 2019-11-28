@@ -21,7 +21,7 @@ public class PlantDaoTest {
         try {
             PlantList plantList = dao.getPlants("naya7777@gmail.com");
             for (int i = 0; i < plantList.size(); i++) {
-                System.out.println(plantList.getPlant(i).getName());
+                System.out.println(plantList.getPlant(i).getPlantName());
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -39,7 +39,7 @@ public class PlantDaoTest {
             dao.createPlant(plant);
             PlantList plantList = dao.getPlants("naya7777@gmail.com");
             for (int i = 0; i < plantList.size(); i++) {
-                System.out.println(plantList.getPlant(i).getName());
+                System.out.println(plantList.getPlant(i).getPlantName());
             }
         } catch (SQLException e) {
             e.printStackTrace();

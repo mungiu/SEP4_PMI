@@ -81,7 +81,12 @@ public class PlantProfile implements IPlantProfile{
 		return light;
 	}
 
-	public void setLight(SensorBoundaries light) {
+    @Override
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setLight(SensorBoundaries light) {
 		this.light = light;
 	}
 

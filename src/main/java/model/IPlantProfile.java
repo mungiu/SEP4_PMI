@@ -28,4 +28,5 @@ public interface IPlantProfile {
 
     SensorBoundaries getLight();
 
+    void setId(int id);
 }
