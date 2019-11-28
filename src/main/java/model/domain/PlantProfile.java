@@ -1,6 +1,8 @@
-package model;
+package model.domain;
 
-public class PlantProfile implements IPlantProfile{
+import model.SensorBoundaries;
+
+public class PlantProfile implements IPlantProfile {
 	private int id;
 	private String name;
 	private String userEmail;

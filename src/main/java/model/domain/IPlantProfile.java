@@ -1,4 +1,6 @@
-package model;
+package model.domain;
+
+import model.SensorBoundaries;
 
 public interface IPlantProfile {
 

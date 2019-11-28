@@ -4,26 +4,26 @@ import java.util.Date;
 
 public class PlantData {
 	private int id;
-	private double value;
-	private SensorDataTypes type;
 	private int plantId;
-	private Date dateTime;
+	private double measurementValue;
+	private SensorDataTypes sensorDataType;
+	private Date measurementTimestamp;
 
 	public PlantData() { }
 
-	public PlantData(int id, double value, SensorDataTypes type, int plantId, Date dateTime) {
+	public PlantData(int id, double measurementValue, SensorDataTypes sensorDataType, int plantId, Date measurementTimestamp) {
 		this.id = id;
-		this.value = value;
-		this.type = type;
+		this.measurementValue = measurementValue;
+		this.sensorDataType = sensorDataType;
 		this.plantId = plantId;
-		this.dateTime = dateTime;
+		this.measurementTimestamp = measurementTimestamp;
 	}
 
-    public PlantData(double value, SensorDataTypes type, int plantId, Date dateTime) {
-        this.value = value;
-        this.type = type;
+    public PlantData(double measurementValue, SensorDataTypes sensorDataType, int plantId, Date measurementTimestamp) {
+        this.measurementValue = measurementValue;
+        this.sensorDataType = sensorDataType;
         this.plantId = plantId;
-        this.dateTime = dateTime;
+        this.measurementTimestamp = measurementTimestamp;
     }
 
 	public int getId() {
@@ -34,20 +34,20 @@ public class PlantData {
 		this.id = id;
 	}
 
-	public double getValue() {
-		return value;
+	public double getMeasurementValue() {
+		return measurementValue;
 	}
 
-	public void setValue(double value) {
-		this.value = value;
+	public void setMeasurementValue(double measurementValue) {
+		this.measurementValue = measurementValue;
 	}
 
-	public SensorDataTypes getType() {
-		return type;
+	public SensorDataTypes getSensorDataType() {
+		return sensorDataType;
 	}
 
-	public void setType(SensorDataTypes type) {
-		this.type = type;
+	public void setSensorDataType(SensorDataTypes sensorDataType) {
+		this.sensorDataType = sensorDataType;
 	}
 
 	public int getPlantId() {
@@ -58,11 +58,11 @@ public class PlantData {
 		this.plantId = plantId;
 	}
 
-	public Date getDateTime() {
-		return dateTime;
+	public Date getMeasurementTimestamp() {
+		return measurementTimestamp;
 	}
 
-	public void setDateTime(Date dateTime) {
-		this.dateTime = dateTime;
+	public void setMeasurementTimestamp(Date measurementTimestamp) {
+		this.measurementTimestamp = measurementTimestamp;
 	}
 }
