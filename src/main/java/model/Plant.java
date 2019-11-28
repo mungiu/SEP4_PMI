@@ -1,20 +1,31 @@
 package model;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import service.IUserService;
-
-import javax.swing.text.PlainDocument;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "clientType")
-
 public class Plant implements IPlant{
 
 	private int id;
-	private String name;
-	private IPlantProfile profile;
+	private String plantName;
+	private IPlantProfile plantProfile;
+	// TODO: Don't we need interface for the PlantData class just as we have it for the PlantProfile?
+	// TODO: Do we even need to have PlantData inside of the Plant class?
 	private PlantData co2, humidity, temperature, light;
+
+	public int getId() { return id; }
+
+	public String getPlantName() {
+		return plantName;
+	}
+
+	public void setPlantName(String plantName) {
+		this.plantName = plantName;
+	}
+
+	public IPlantProfile getPlantProfile() {
+		return plantProfile;
+	}
+
+	public void setPlantProfile(IPlantProfile plantProfile) {
+		this.plantProfile = plantProfile;
+	}
 
 	@Override
 	public PlantData getCo2() {
@@ -60,49 +71,24 @@ public class Plant implements IPlant{
 
 	}
 
-	public Plant(int id, String name, IPlantProfile profile, PlantData co2, PlantData temperature, PlantData humidity, PlantData light) {
+	public Plant(int id, String plantName, IPlantProfile plantProfile, PlantData co2, PlantData temperature, PlantData humidity, PlantData light) {
 		this.id = id;
-		this.name = name;
-		this.profile = profile;
+		this.plantName = plantName;
+		this.plantProfile = plantProfile;
 		this.co2 = co2;
 		this.temperature = temperature;
 		this.humidity = humidity;
 		this.light = light;
 	}
 
-	public Plant(String name, IPlantProfile profile) {
-		this.name = name;
-		this.profile = profile;
+	public Plant(String plantName, IPlantProfile plantProfile) {
+		this.plantName = plantName;
+		this.plantProfile = plantProfile;
 	}
 
-	public Plant(int id, String name, IPlantProfile profile) {
+	public Plant(int id, String plantName, IPlantProfile plantProfile) {
 		this.id = id;
-		this.name = name;
-		this.profile = profile;
+		this.plantName = plantName;
+		this.plantProfile = plantProfile;
 	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public IPlantProfile getProfile() {
-		return profile;
-	}
-
-	public void setProfile(IPlantProfile profile) {
-		this.profile = profile;
-	}
-
 }

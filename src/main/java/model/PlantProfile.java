@@ -1,9 +1,5 @@
 package model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
-import java.util.Date;
-
 public class PlantProfile implements IPlantProfile{
 	private int id;
 	private String name;
@@ -15,7 +11,6 @@ public class PlantProfile implements IPlantProfile{
 
 	public PlantProfile(int id, String name, IUser user, SensorBoundaries co2, SensorBoundaries temperature,
 			SensorBoundaries humidity, SensorBoundaries light) {
-		super();
 		this.id = id;
 		this.name = name;
 		this.user = user;
@@ -27,7 +22,6 @@ public class PlantProfile implements IPlantProfile{
 
 	public PlantProfile(String name, IUser user, SensorBoundaries co2, SensorBoundaries temperature,
 						SensorBoundaries humidity, SensorBoundaries light) {
-		super();
 		this.name = name;
 		this.user = user;
 		this.co2 = co2;
@@ -39,10 +33,6 @@ public class PlantProfile implements IPlantProfile{
 
 	public int getId() {
 		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getName() {

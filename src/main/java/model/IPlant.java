@@ -4,15 +4,13 @@ public interface IPlant {
 
     int getId();
 
-    void setId(int id);
+    String getPlantName();
 
-    String getName();
+    void setPlantName(String plantName);
 
-    void setName(String name);
+    IPlantProfile getPlantProfile();
 
-    IPlantProfile getProfile();
-
-    void setProfile(IPlantProfile plantProfile);
+    void setPlantProfile(IPlantProfile plantProfile);
 
     PlantData getCo2();
 

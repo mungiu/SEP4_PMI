@@ -49,6 +49,7 @@ public class PlantProfileService implements IPlantProfileService {
         dao.deletePlantProfile(plantProfileID);
     }
 
+    // TODO: Simplify the if statement or create a custom exception
     private boolean isValid(PlantProfile plantProfile) {
         if (plantProfile == null || plantProfile.getName() == null
                 || plantProfile.getTemperature() == null || plantProfile.getLight() == null

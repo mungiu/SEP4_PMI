@@ -20,13 +20,12 @@ public class UserController {
     }
 
     /**
-     * todo
+     * Documentation to be done
      */
     @GET
     @Path("/users/{userID}")
     public Response getPlantById(@PathParam("userID") String userId) {
         try {
-            iUserService = new UserService();
             IUser user = iUserService.getUserById(userId);
             return Response.status(200).entity(user).build();
         } catch (SQLException | ParseException e) {

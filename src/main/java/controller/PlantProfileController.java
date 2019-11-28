@@ -19,32 +19,16 @@ public class PlantProfileController {
 	}
 
 	/**
-	 * todo
-	 */
-	/*@GET
-	@Path("/plantprofiles/{userID}")
-	public Response getMyPlantProfiles(String userId) {
-		PlantProfileList plantProfiles = null;
-		try {
-			plantProfiles = iPlantProfileService.getAllPlantProfiles(userId);
-//			return Response.status(200).entity(plantProfiles).build();
-			return Response.status(200).entity("Hello World").build();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return Response.status(500).entity(e).build();
-		}
-	}*/
-
-	/**
-	 * todo
+	 * Documentation to be done
 	 */
 	@GET
 	@Path("/plantprofiles/{plantProfileID}")
 	public Response getPlantProfileById(@PathParam("plantProfileID") String plantID) {
 		try {
 			PlantProfile plant = iPlantProfileService.getPlantProfileById(plantID);
-//			return Response.status(200).entity(plant).build();
-			return Response.status(200).entity("Hello World 3").build();
+			// TODO: Uncomment the bellow method when we're able to receive a plant profile from the database
+			// return Response.status(200).entity(plant).build();
+			return Response.status(200).entity("Response from the getPlantProfileById method").build();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return Response.status(500).build();
@@ -52,7 +36,7 @@ public class PlantProfileController {
 	}
 
 	/**
-	 * todo
+	 * Documentation to be done
 	 */
 	@POST
 	@Path("/plantprofiles")
@@ -67,7 +51,7 @@ public class PlantProfileController {
 	}
 
 	/**
-	 * todo
+	 * Documentation to be done
 	 */
 	@PUT
 	@Path("/plantprofiles")
@@ -82,7 +66,7 @@ public class PlantProfileController {
 	}
 
 	/**
-	 * todo
+	 * Documentation to be done
 	 */
 	@DELETE
 	@Path("/plantprofiles/{plantProfileID}")

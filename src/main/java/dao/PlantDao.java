@@ -20,7 +20,7 @@ public class PlantDao {
 
     public void createPlant(IPlant plant) throws SQLException {
         try {
-            db.update(Queries.CREATE_PLANT, plant.getProfile().getId(), plant.getName());
+            db.update(Queries.CREATE_PLANT, plant.getPlantProfile().getId(), plant.getPlantName());
 
         } catch (SQLException e) {
             throw e;
@@ -45,7 +45,7 @@ public class PlantDao {
     public void updatePlant(IPlant plant) throws SQLException {
         try {
             //update SEP4_PMI.Plant set Plant_ID = ?, Profile_ID = ?, PlantName = ? where Plant_ID = ?;
-            db.update(Queries.UPDATE_PLANT, plant.getId(), plant.getProfile().getId(), plant.getName(), plant.getId());
+            db.update(Queries.UPDATE_PLANT, plant.getId(), plant.getPlantProfile().getId(), plant.getPlantName(), plant.getId());
         } catch (SQLException e) {
             throw e;
         }

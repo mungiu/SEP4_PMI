@@ -26,22 +26,7 @@ public class PlantController {
 	}
 
 	/**
-	 * todo
-	 */
-	/*@GET
-	@Path("/plants/{userID}")
-	public Response getMyPlants(String userId) {
-		try {
-			PlantList plants = iPlantService.getAllPlants(userId);
-			return Response.status(200).entity(plants).build();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return Response.status(500).build();
-		}
-	}*/
-
-	/**
-	 * todo
+	 * Documentation to be done
 	 */
 	@GET
 	@Path("/plants/{plantID}")
@@ -56,7 +41,7 @@ public class PlantController {
 	}
 
 	/**
-	 * todo
+	 * Documentation to be done
 	 */
 	@POST
 	@Path("/plants")
@@ -71,7 +56,7 @@ public class PlantController {
 	}
 
 	/**
-	 * todo
+	 * Documentation to be done
 	 */
 	@PUT
 	@Path("/plants")
@@ -86,7 +71,7 @@ public class PlantController {
 	}
 
 	/**
-	 * todo
+	 * Documentation to be done
 	 */
 	@DELETE
 	@Path("/plants/{plantID}")
