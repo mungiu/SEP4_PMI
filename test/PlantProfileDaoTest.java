@@ -1,5 +1,5 @@
 import dao.PlantProfileDao;
-import model.*;
+import model.PlantProfileList;
 import org.junit.Before;
 import org.junit.Test;
 

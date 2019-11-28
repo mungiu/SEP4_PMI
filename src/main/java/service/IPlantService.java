@@ -1,6 +1,6 @@
 package service;
 
-import model.IPlant;
+import model.domain.IPlant;
 import utils.exceptions.MissingDataException;
 
 import java.sql.SQLException;

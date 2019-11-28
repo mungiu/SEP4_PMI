@@ -1,6 +1,6 @@
 package controller;
 
-import model.IUser;
+import model.domain.IUser;
 import service.IUserService;
 import service.UserService;
 

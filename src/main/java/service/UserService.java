@@ -3,10 +3,10 @@ package service;
 import dao.PlantDao;
 import dao.PlantProfileDao;
 import dao.UserDao;
-import model.IUser;
+import model.domain.IUser;
 import model.PlantList;
 import model.PlantProfileList;
-import model.User;
+import model.domain.User;
 
 import java.sql.SQLException;
 import java.text.ParseException;

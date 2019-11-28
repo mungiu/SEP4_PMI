@@ -1,7 +1,6 @@
 package service;
 
-import model.PlantProfile;
-import model.PlantProfileList;
+import model.domain.PlantProfile;
 import utils.exceptions.MissingDataException;
 
 import java.sql.SQLException;

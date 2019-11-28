@@ -1,6 +1,6 @@
 package service;
 
-import model.IUser;
+import model.domain.IUser;
 
 import java.sql.SQLException;
 import java.text.ParseException;

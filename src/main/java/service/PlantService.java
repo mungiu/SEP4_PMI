@@ -1,7 +1,7 @@
 package service;
 
 import dao.PlantDao;
-import model.IPlant;
+import model.domain.IPlant;
 
 import java.sql.SQLException;
 

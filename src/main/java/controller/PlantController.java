@@ -1,7 +1,7 @@
 package controller;
 
-import model.IPlant;
-import model.Plant;
+import model.domain.IPlant;
+import model.domain.Plant;
 import service.IPlantService;
 import service.PlantService;
 import utils.exceptions.MissingDataException;

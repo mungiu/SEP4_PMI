@@ -1,7 +1,7 @@
 import dao.PlantDao;
-import model.Plant;
+import model.domain.Plant;
 import model.PlantList;
-import model.PlantProfile;
+import model.domain.PlantProfile;
 import org.junit.Before;
 import org.junit.Test;
 

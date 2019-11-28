@@ -1,5 +1,7 @@
 package model;
 
+import model.domain.IPlant;
+
 import java.util.ArrayList;
 import java.util.List;
 
