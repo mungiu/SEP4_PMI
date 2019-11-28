@@ -5,13 +5,11 @@ public class Queries {
 	// TODO: What about splitting this class into 3? PlantQueries, PlantProfileQueries and UserQueries; to keep it
 	// nice and clean
 	public static final String GET_PLANTS_BY_USER_ID = "SELECT p.Plant_ID, p.Profile_ID, p.PlantName,\n" +
-			"       PP.Profile_Name, PP.CO2_Max, PP.CO2_Min,\n" +
-			"       PP.Hum_Max, PP.Hum_Min,\n" +
-			"       PP.Tem_Max, PP.Tem_Min,\n" +
-			"       PP.Light_Max, PP.Light_Min,\n" +
-			"       PP.User_ID \n" +
-			//"       PD.ID, PD.Sensor_Type, PD.Sensor_Value, PD.TimeStamp\n" +
-			//"from dbo.Plant p left join dbo.PlantData PD on p.Plant_ID = PD.Plant_ID\n" +
+			"PP.Profile_Name, PP.CO2_Max, PP.CO2_Min,\n" +
+			"PP.Hum_Max, PP.Hum_Min,\n" +
+			"PP.Tem_Max, PP.Tem_Min,\n" +
+			"PP.Light_Max, PP.Light_Min,\n" +
+			"PP.User_ID \n" +
 			"from dbo.Plant p left join dbo.PlantProfile PP on p.Profile_ID = PP.Profile_ID\n" +
 			"WHERE User_ID = ?;";
 
