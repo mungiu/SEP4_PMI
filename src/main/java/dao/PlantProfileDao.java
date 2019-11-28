@@ -19,10 +19,10 @@ public class PlantProfileDao {
 	public void createPlantProfile(PlantProfile plantProfile) throws SQLException{
 		try {
 			db.update(Queries.CREATE_PLANT_PROFILE, plantProfile.getUserEmail(), plantProfile.getName(),
-					plantProfile.getCo2().getMax(), plantProfile.getCo2().getMin(),
-					plantProfile.getHumidity().getMax(), plantProfile.getHumidity().getMin(),
-					plantProfile.getTemperature().getMax(), plantProfile.getTemperature().getMin(),
-					plantProfile.getLight().getMax(), plantProfile.getLight().getMin());
+					plantProfile.getCo2Boundaries().getMax(), plantProfile.getCo2Boundaries().getMin(),
+					plantProfile.getHumidityBoundaries().getMax(), plantProfile.getHumidityBoundaries().getMin(),
+					plantProfile.getTemperatureBoundaries().getMax(), plantProfile.getTemperatureBoundaries().getMin(),
+					plantProfile.getLightBoundaries().getMax(), plantProfile.getLightBoundaries().getMin());
 
 		} catch (SQLException e) {
 			throw e;
@@ -69,10 +69,10 @@ public class PlantProfileDao {
 		// TODO Auto-generated method stub
 		try{
 			db.update(Queries.UPDATE_PLANT_PROFILE, plantProfile.getId(), plantProfile.getUserEmail(),
-					plantProfile.getCo2().getMin(), plantProfile.getCo2().getMax(),
-					plantProfile.getTemperature().getMin(),plantProfile.getTemperature().getMin(),
-					plantProfile.getHumidity().getMin(), plantProfile.getHumidity().getMax(),
-					plantProfile.getLight().getMax(), plantProfile.getLight().getMin());
+					plantProfile.getCo2Boundaries().getMin(), plantProfile.getCo2Boundaries().getMax(),
+					plantProfile.getTemperatureBoundaries().getMin(),plantProfile.getTemperatureBoundaries().getMin(),
+					plantProfile.getHumidityBoundaries().getMin(), plantProfile.getHumidityBoundaries().getMax(),
+					plantProfile.getLightBoundaries().getMax(), plantProfile.getLightBoundaries().getMin());
 		}catch (SQLException e){
 			throw e;
 		}

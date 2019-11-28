@@ -14,21 +14,21 @@ public interface IPlantProfile {
 
     String getUserEmail();
 
-    void setCo2(SensorBoundaries boundaries);
+    void setCo2Boundaries(SensorBoundaries boundaries);
 
-    SensorBoundaries getCo2();
+    SensorBoundaries getCo2Boundaries();
 
-    void setTemperature(SensorBoundaries boundaries);
+    void setTemperatureBoundaries(SensorBoundaries boundaries);
 
-    SensorBoundaries getTemperature();
+    SensorBoundaries getTemperatureBoundaries();
 
-    void setHumidity(SensorBoundaries boundaries);
+    void setHumidityBoundaries(SensorBoundaries boundaries);
 
-    SensorBoundaries getHumidity();
+    SensorBoundaries getHumidityBoundaries();
 
-    void setLight(SensorBoundaries bondaries);
+    void setLightBoundaries(SensorBoundaries bondaries);
 
-    SensorBoundaries getLight();
+    SensorBoundaries getLightBoundaries();
 
     void setId(int id);
 }

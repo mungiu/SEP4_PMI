@@ -45,12 +45,12 @@ public class PlantProfileService implements IPlantProfileService {
     }
 
     private boolean isValid(PlantProfile plantProfile) {
-        return plantProfile != null && plantProfile.getName() != null
-                && plantProfile.getTemperature() != null && plantProfile.getLight() != null
-                && plantProfile.getCo2() != null && plantProfile.getHumidity() != null
-                && plantProfile.getCo2().isValid() && plantProfile.getHumidity().isValid()
-                && plantProfile.getLight().isValid() && plantProfile.getTemperature().isValid()
-                && plantProfile.getUserEmail() != null && plantProfile.getUserEmail() != null;
+        return plantProfile != null
+                && plantProfile.getName() != null && plantProfile.getUserEmail() != null
+                && plantProfile.getTemperatureBoundaries() != null && plantProfile.getTemperatureBoundaries().isValid()
+                && plantProfile.getLightBoundaries() != null && plantProfile.getLightBoundaries().isValid()
+                && plantProfile.getCo2Boundaries() != null && plantProfile.getCo2Boundaries().isValid()
+                && plantProfile.getHumidityBoundaries() != null && plantProfile.getHumidityBoundaries().isValid();
     }
 
 
