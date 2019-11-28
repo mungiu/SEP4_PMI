@@ -37,7 +37,7 @@ public class PlantController {
 			return Response.status(200).entity(plant).build();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return Response.status(500).build();
+			return Response.status(500).entity(e.getMessage()).build();
 		}
 	}
 
@@ -50,11 +50,9 @@ public class PlantController {
 		try {
 			iPlantService.createPlant(plant);
 			return Response.status(200).build();
-		} catch (SQLException e) {
+		} catch (SQLException | MissingDataException e) {
 			e.printStackTrace();
-			return Response.status(500).build();
-		} catch (MissingDataException e) {
-			return Response.status(500).entity(e).build();
+			return Response.status(500).entity(e.getMessage()).build();
 		}
 	}
 
@@ -67,11 +65,9 @@ public class PlantController {
 		try {
 			iPlantService.updatePlant(plant);
 			return Response.status(200).build();
-		} catch (SQLException e) {
+		} catch (SQLException | MissingDataException e) {
 			e.printStackTrace();
-			return Response.status(500).entity(e).build();
-		} catch (MissingDataException e) {
-			return Response.status(500).entity(e).build();
+			return Response.status(500).entity(e.getMessage()).build();
 		}
 	}
 
