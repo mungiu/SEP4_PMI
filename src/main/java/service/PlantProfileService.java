@@ -1,7 +1,7 @@
 package service;
 
 import dao.PlantProfileDao;
-import model.PlantProfile;
+import model.domain.PlantProfile;
 import utils.exceptions.MissingDataException;
 
 import java.sql.SQLException;
@@ -50,7 +50,7 @@ public class PlantProfileService implements IPlantProfileService {
                 && plantProfile.getCo2() != null && plantProfile.getHumidity() != null
                 && plantProfile.getCo2().isValid() && plantProfile.getHumidity().isValid()
                 && plantProfile.getLight().isValid() && plantProfile.getTemperature().isValid()
-                && plantProfile.getUser() != null && plantProfile.getUser().getEmail() != null;
+                && plantProfile.getUserEmail() != null && plantProfile.getUserEmail() != null;
     }
 
 

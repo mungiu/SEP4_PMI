@@ -1,8 +1,9 @@
 package controller;
 
-import model.PlantProfile;
+import model.domain.PlantProfile;
 import service.IPlantProfileService;
 import service.PlantProfileService;
+import utils.exceptions.MissingDataException;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
@@ -46,7 +47,11 @@ public class PlantProfileController {
 			return Response.status(200).build();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			// TODO: Write a user-friendly error message to the response body
 			return Response.status(500).entity(e).build();
+		} catch (MissingDataException e) {
+			e.printStackTrace();
+			return Response.status(500).entity(e.getMessage()).build();
 		}
 	}
 
@@ -61,7 +66,11 @@ public class PlantProfileController {
 			return Response.status(200).build();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			// TODO: Write a user-friendly error message to the response body
 			return Response.status(500).entity(e).build();
+		} catch (MissingDataException e) {
+			e.printStackTrace();
+			return Response.status(500).entity(e.getMessage()).build();
 		}
 	}
 
