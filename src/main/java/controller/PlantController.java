@@ -4,6 +4,7 @@ import model.IPlant;
 import model.Plant;
 import service.IPlantService;
 import service.PlantService;
+import utils.exceptions.MissingDataException;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
@@ -52,6 +53,8 @@ public class PlantController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return Response.status(500).build();
+		} catch (MissingDataException e) {
+			return Response.status(500).entity(e).build();
 		}
 	}
 
@@ -66,6 +69,8 @@ public class PlantController {
 			return Response.status(200).build();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return Response.status(500).entity(e).build();
+		} catch (MissingDataException e) {
 			return Response.status(500).entity(e).build();
 		}
 	}

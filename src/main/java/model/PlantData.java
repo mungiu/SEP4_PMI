@@ -9,13 +9,7 @@ public class PlantData {
 	private int plantId;
 	private Date dateTime;
 
-	public PlantData(int id) {
-		this.id = id;
-	}
-
-	public PlantData() {
-
-	}
+	public PlantData() { }
 
 	public PlantData(int id, double value, SensorDataTypes type, int plantId, Date dateTime) {
 		this.id = id;
