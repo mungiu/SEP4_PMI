@@ -2,6 +2,8 @@ package model;
 
 public interface IPlant {
 
+    int getPlantId();
+
     String getDeviceId();
 
     void setDeviceId(String deviceId);
