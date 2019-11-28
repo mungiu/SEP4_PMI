@@ -45,11 +45,7 @@ public class PlantProfileController {
 		try {
 			iPlantProfileService.createPlantProfile(plantProfile);
 			return Response.status(200).build();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			// TODO: Write a user-friendly error message to the response body
-			return Response.status(500).entity(e).build();
-		} catch (MissingDataException e) {
+		} catch (SQLException | MissingDataException e) {
 			e.printStackTrace();
 			return Response.status(500).entity(e.getMessage()).build();
 		}
@@ -64,11 +60,7 @@ public class PlantProfileController {
 		try {
 			iPlantProfileService.updatePlantProfile(plantProfile);
 			return Response.status(200).build();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			// TODO: Write a user-friendly error message to the response body
-			return Response.status(500).entity(e).build();
-		} catch (MissingDataException e) {
+		} catch (SQLException | MissingDataException e) {
 			e.printStackTrace();
 			return Response.status(500).entity(e.getMessage()).build();
 		}
