@@ -2,7 +2,9 @@ package model;
 
 public interface IPlant {
 
-    int getId();
+    String getDeviceId();
+
+    void setDeviceId(String deviceId);
 
     String getPlantName();
 

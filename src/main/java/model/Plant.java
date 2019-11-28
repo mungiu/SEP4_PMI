@@ -2,14 +2,18 @@ package model;
 
 public class Plant implements IPlant{
 
-	private int id;
+	private String deviceId;
 	private String plantName;
 	private IPlantProfile plantProfile;
 	// TODO: Don't we need interface for the PlantData class just as we have it for the PlantProfile?
 	// TODO: Do we even need to have PlantData inside of the Plant class?
 	private PlantData co2, humidity, temperature, light;
 
-	public int getId() { return id; }
+	public String getDeviceId() { return deviceId; }
+
+	public void setDeviceId(String deviceId) {
+		this.deviceId = deviceId;
+	}
 
 	public String getPlantName() {
 		return plantName;
@@ -67,12 +71,10 @@ public class Plant implements IPlant{
 		this.light = light;
 	}
 
-	public Plant() {
+	public Plant() { }
 
-	}
-
-	public Plant(int id, String plantName, IPlantProfile plantProfile, PlantData co2, PlantData temperature, PlantData humidity, PlantData light) {
-		this.id = id;
+	public Plant(String deviceId, String plantName, IPlantProfile plantProfile, PlantData co2, PlantData temperature, PlantData humidity, PlantData light) {
+		this.deviceId = deviceId;
 		this.plantName = plantName;
 		this.plantProfile = plantProfile;
 		this.co2 = co2;
@@ -86,8 +88,8 @@ public class Plant implements IPlant{
 		this.plantProfile = plantProfile;
 	}
 
-	public Plant(int id, String plantName, IPlantProfile plantProfile) {
-		this.id = id;
+	public Plant(String deviceId, String plantName, IPlantProfile plantProfile) {
+		this.deviceId = deviceId;
 		this.plantName = plantName;
 		this.plantProfile = plantProfile;
 	}

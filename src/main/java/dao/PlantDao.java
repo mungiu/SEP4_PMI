@@ -45,7 +45,7 @@ public class PlantDao {
     public void updatePlant(IPlant plant) throws SQLException {
         try {
             //update SEP4_PMI.Plant set Plant_ID = ?, Profile_ID = ?, PlantName = ? where Plant_ID = ?;
-            db.update(Queries.UPDATE_PLANT, plant.getId(), plant.getPlantProfile().getId(), plant.getPlantName(), plant.getId());
+            db.update(Queries.UPDATE_PLANT, plant.getDeviceId(), plant.getPlantProfile().getId(), plant.getPlantName(), plant.getDeviceId());
         } catch (SQLException e) {
             throw e;
         }
