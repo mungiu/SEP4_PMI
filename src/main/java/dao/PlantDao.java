@@ -52,7 +52,7 @@ public class PlantDao {
     /**
      * Get all plants from the database
      */
-    public PlantList getPlants(String userEmail) throws SQLException, ParseException {
+    public PlantList getPlants(String userEmail) throws SQLException {
             ArrayList<Object[]> queryResults = db.query(Queries.GET_PLANTS_BY_USER_ID, userEmail);
             PlantList plantList = new PlantList();
 
