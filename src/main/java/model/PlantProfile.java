@@ -30,15 +30,17 @@ public class PlantProfile implements IPlantProfile{
 		this.light = light;
 	}
 
-
+	@Override
 	public int getId() {
 		return id;
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
 
+	@Override
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -53,39 +55,45 @@ public class PlantProfile implements IPlantProfile{
 		return user;
 	}
 
+	@Override
 	public SensorBoundaries getCo2() {
 		return co2;
 	}
 
+	@Override
 	public void setCo2(SensorBoundaries co2) {
 		this.co2 = co2;
 	}
 
+	@Override
 	public SensorBoundaries getTemperature() {
 		return temperature;
 	}
 
+	@Override
 	public void setTemperature(SensorBoundaries temperature) {
 		this.temperature = temperature;
 	}
 
+	@Override
 	public SensorBoundaries getHumidity() {
 		return humidity;
 	}
 
+	@Override
 	public void setHumidity(SensorBoundaries humidity) {
 		this.humidity = humidity;
 	}
 
+	@Override
 	public SensorBoundaries getLight() {
 		return light;
 	}
 
     @Override
-    public void setId(int id) {
-        this.id = id;
-    }
+    public void setId(int id) { this.id = id; }
 
+	@Override
     public void setLight(SensorBoundaries light) {
 		this.light = light;
 	}

@@ -6,8 +6,6 @@ public class Plant implements IPlant{
 	private String deviceId;
 	private String plantName;
 	private IPlantProfile plantProfile;
-	// TODO: Don't we need interface for the PlantData class just as we have it for the PlantProfile?
-	// TODO: Do we even need to have PlantData inside of the Plant class?
 	private PlantData co2, humidity, temperature, light;
 
 	public int getPlantId() { return plantId; }
