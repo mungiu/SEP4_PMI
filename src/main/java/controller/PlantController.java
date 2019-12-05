@@ -1,9 +1,10 @@
 package controller;
 
-import model.IPlant;
-import model.Plant;
+import model.domain.IPlant;
+import model.domain.Plant;
 import service.IPlantService;
 import service.PlantService;
+import utils.exceptions.MissingDataException;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
@@ -26,22 +27,7 @@ public class PlantController {
 	}
 
 	/**
-	 * todo
-	 */
-	/*@GET
-	@Path("/plants/{userID}")
-	public Response getMyPlants(String userId) {
-		try {
-			PlantList plants = iPlantService.getAllPlants(userId);
-			return Response.status(200).entity(plants).build();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return Response.status(500).build();
-		}
-	}*/
-
-	/**
-	 * todo
+	 * Documentation to be done
 	 */
 	@GET
 	@Path("/plants/{plantID}")
@@ -51,12 +37,12 @@ public class PlantController {
 			return Response.status(200).entity(plant).build();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return Response.status(500).build();
+			return Response.status(500).entity(e.getMessage()).build();
 		}
 	}
 
 	/**
-	 * todo
+	 * Documentation to be done
 	 */
 	@POST
 	@Path("/plants")
@@ -64,14 +50,14 @@ public class PlantController {
 		try {
 			iPlantService.createPlant(plant);
 			return Response.status(200).build();
-		} catch (SQLException e) {
+		} catch (SQLException | MissingDataException e) {
 			e.printStackTrace();
-			return Response.status(500).build();
+			return Response.status(500).entity(e.getMessage()).build();
 		}
 	}
 
 	/**
-	 * todo
+	 * Documentation to be done
 	 */
 	@PUT
 	@Path("/plants")
@@ -79,14 +65,14 @@ public class PlantController {
 		try {
 			iPlantService.updatePlant(plant);
 			return Response.status(200).build();
-		} catch (SQLException e) {
+		} catch (SQLException | MissingDataException e) {
 			e.printStackTrace();
-			return Response.status(500).entity(e).build();
+			return Response.status(500).entity(e.getMessage()).build();
 		}
 	}
 
 	/**
-	 * todo
+	 * Documentation to be done
 	 */
 	@DELETE
 	@Path("/plants/{plantID}")

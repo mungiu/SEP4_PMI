@@ -1,6 +1,7 @@
 package dao;
 
 import model.*;
+import model.domain.*;
 import utils.Database;
 import utils.Queries;
 
@@ -17,11 +18,11 @@ public class PlantProfileDao {
 	
 	public void createPlantProfile(PlantProfile plantProfile) throws SQLException{
 		try {
-			db.update(Queries.CREATE_PLANT_PROFILE, plantProfile.getUser().getEmail(), plantProfile.getName(),
-					plantProfile.getCo2().getMax(), plantProfile.getCo2().getMin(),
-					plantProfile.getHumidity().getMax(), plantProfile.getHumidity().getMin(),
-					plantProfile.getTemperature().getMax(), plantProfile.getTemperature().getMin(),
-					plantProfile.getLight().getMax(), plantProfile.getLight().getMin());
+			db.update(Queries.CREATE_PLANT_PROFILE, plantProfile.getUserEmail(), plantProfile.getName(),
+					plantProfile.getCo2Boundaries().getMax(), plantProfile.getCo2Boundaries().getMin(),
+					plantProfile.getHumidityBoundaries().getMax(), plantProfile.getHumidityBoundaries().getMin(),
+					plantProfile.getTemperatureBoundaries().getMax(), plantProfile.getTemperatureBoundaries().getMin(),
+					plantProfile.getLightBoundaries().getMax(), plantProfile.getLightBoundaries().getMin());
 
 		} catch (SQLException e) {
 			throw e;
@@ -55,7 +56,7 @@ public class PlantProfileDao {
 				SensorBoundaries humidity = new SensorBoundaries(humidityMin,humidityMax);
 				SensorBoundaries temperature = new SensorBoundaries(temperatureMin,temperatureMax);
 				SensorBoundaries light = new SensorBoundaries(lightMin,lightMax);
-				IPlantProfile profile = new PlantProfile(profileId,profileName,user,co2,temperature,humidity,light);
+				IPlantProfile profile = new PlantProfile(profileId,profileName,user.getEmail(),co2,temperature,humidity,light);
 				profiles.addPlantProfile(profile);
 			}
 			return profiles;
@@ -67,11 +68,11 @@ public class PlantProfileDao {
 	public void updatePlantProfile(PlantProfile plantProfile) throws SQLException{
 		// TODO Auto-generated method stub
 		try{
-			db.update(Queries.UPDATE_PLANT_PROFILE, plantProfile.getId(), plantProfile.getUser().getEmail(),
-					plantProfile.getCo2().getMin(), plantProfile.getCo2().getMax(),
-					plantProfile.getTemperature().getMin(),plantProfile.getTemperature().getMin(),
-					plantProfile.getHumidity().getMin(), plantProfile.getHumidity().getMax(),
-					plantProfile.getLight().getMax(), plantProfile.getLight().getMin());
+			db.update(Queries.UPDATE_PLANT_PROFILE, plantProfile.getId(), plantProfile.getUserEmail(),
+					plantProfile.getCo2Boundaries().getMin(), plantProfile.getCo2Boundaries().getMax(),
+					plantProfile.getTemperatureBoundaries().getMin(),plantProfile.getTemperatureBoundaries().getMin(),
+					plantProfile.getHumidityBoundaries().getMin(), plantProfile.getHumidityBoundaries().getMax(),
+					plantProfile.getLightBoundaries().getMax(), plantProfile.getLightBoundaries().getMin());
 		}catch (SQLException e){
 			throw e;
 		}
@@ -85,6 +86,29 @@ public class PlantProfileDao {
 			throw e;
 		}
 		
+	}
+
+	// TODO: This can be moved to PlantProfileDao
+	private void initializeSensorBoundaries(Object[] row) {
+		SensorBoundaries co2 = new SensorBoundaries(
+				Double.parseDouble(row[5].toString()),
+				Double.parseDouble(row[4].toString())
+		);
+
+		SensorBoundaries humidity = new SensorBoundaries(
+				Double.parseDouble(row[7].toString()),
+				Double.parseDouble(row[6].toString())
+		);
+
+		SensorBoundaries temperature = new SensorBoundaries(
+				Double.parseDouble(row[9].toString()),
+				Double.parseDouble(row[8].toString())
+		);
+
+		SensorBoundaries light = new SensorBoundaries(
+				Double.parseDouble(row[10].toString()),
+				Double.parseDouble(row[11].toString())
+		);
 	}
 
 	public PlantProfile getPlantProfileById(String plantID) throws SQLException{

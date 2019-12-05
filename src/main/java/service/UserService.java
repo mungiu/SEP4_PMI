@@ -3,15 +3,16 @@ package service;
 import dao.PlantDao;
 import dao.PlantProfileDao;
 import dao.UserDao;
-import model.IUser;
+import model.domain.IUser;
 import model.PlantList;
 import model.PlantProfileList;
-import model.User;
+import model.domain.User;
 
 import java.sql.SQLException;
 import java.text.ParseException;
 
 public class UserService implements IUserService {
+    // TODO: What's that? This shouldn't be here.
     public PlantDao plantDao;
     public PlantProfileDao plantProfileDao;
     public UserDao userDao;
@@ -22,6 +23,7 @@ public class UserService implements IUserService {
         userDao = new UserDao();
     }
 
+    // TODO: What's that? This shouldn't be here.
     public void instanciateDaoIfNull(){
         if(plantProfileDao == null){
             plantProfileDao = new PlantProfileDao();

@@ -1,6 +1,9 @@
-package model;
+package model.domain;
 
-public class User implements IUser{
+import model.PlantList;
+import model.PlantProfileList;
+
+public class User implements IUser {
 
 	private String email;
 	private String password;

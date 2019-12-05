@@ -1,15 +1,10 @@
 package service;
 
-import model.PlantProfile;
-import model.PlantProfileList;
-import utils.Database;
-
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
 import dao.PlantProfileDao;
+import model.domain.PlantProfile;
+import utils.exceptions.MissingDataException;
+
+import java.sql.SQLException;
 
 public class PlantProfileService implements IPlantProfileService {
 
@@ -20,11 +15,11 @@ public class PlantProfileService implements IPlantProfileService {
     }
 
     @Override
-    public void createPlantProfile(PlantProfile plantProfile) throws SQLException {
+    public void createPlantProfile(PlantProfile plantProfile) throws SQLException, MissingDataException {
         if(isValid(plantProfile)){
             dao.createPlantProfile(plantProfile);
-        } else{
-           // throw new utils.exceptions.InvalidFormException("Invalid plant info");
+        } else {
+            throw new MissingDataException("PlantProfile didn't contain all required data");
         }
     }
 
@@ -35,11 +30,11 @@ public class PlantProfileService implements IPlantProfileService {
 
 
     @Override
-    public void updatePlantProfile(PlantProfile plantProfile) throws SQLException {
+    public void updatePlantProfile(PlantProfile plantProfile) throws SQLException, MissingDataException {
         if(isValid(plantProfile)){
             dao.updatePlantProfile(plantProfile);
         } else {
-            //throw new InvalidFormException("Invalid plant info");
+            throw new MissingDataException("PlantProfile didn't contain all required data");
         }
     }
 
@@ -50,17 +45,12 @@ public class PlantProfileService implements IPlantProfileService {
     }
 
     private boolean isValid(PlantProfile plantProfile) {
-        if (plantProfile == null || plantProfile.getName() == null
-                || plantProfile.getTemperature() == null || plantProfile.getLight() == null
-                || plantProfile.getCo2() == null || plantProfile.getHumidity() == null
-                || !plantProfile.getCo2().isValid() || !plantProfile.getHumidity().isValid()
-                || !plantProfile.getLight().isValid() || !plantProfile.getTemperature().isValid()
-                || plantProfile.getUser() == null || plantProfile.getUser().getEmail() == null) {
-            return false;
-        }
-        else {
-            return true;
-        }
+        return plantProfile != null
+                && plantProfile.getName() != null && plantProfile.getUserEmail() != null
+                && plantProfile.getTemperatureBoundaries() != null && plantProfile.getTemperatureBoundaries().isValid()
+                && plantProfile.getLightBoundaries() != null && plantProfile.getLightBoundaries().isValid()
+                && plantProfile.getCo2Boundaries() != null && plantProfile.getCo2Boundaries().isValid()
+                && plantProfile.getHumidityBoundaries() != null && plantProfile.getHumidityBoundaries().isValid();
     }
 
 
