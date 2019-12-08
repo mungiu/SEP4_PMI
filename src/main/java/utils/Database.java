@@ -39,9 +39,10 @@ public class Database {
      *
      * @return connection
      */
-    private static Connection getNewConnection() {
+    public static Connection getNewConnection() {
         try {
             connection = DriverManager.getConnection(DatabaseData.MY_SQL_URL, DatabaseData.DB_USERNAME, DatabaseData.DB_PASSWORD);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -96,7 +97,7 @@ public class Database {
         return result;
     }
 
-    private void closeDatabase() throws SQLException {
+    public void closeDatabase() throws SQLException {
         connection.close();
     }
 }
