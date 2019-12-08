@@ -73,7 +73,7 @@ public class PlantDao {
      */
     private PlantData[] getLatestPlantData(int plantId) throws SQLException, ParseException {
         SensorDataTypes[] typesInOrder =
-                {SensorDataTypes.CO2, SensorDataTypes.HUM, SensorDataTypes.TEMP, SensorDataTypes.LIGHT};
+                {SensorDataTypes.CO2, SensorDataTypes.HUMIDITY, SensorDataTypes.TEMPERATURE, SensorDataTypes.LIGHT};
 
         PlantData[] plantData = new PlantData[4];
 
@@ -111,7 +111,7 @@ public class PlantDao {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         int plantDataId = Integer.parseInt(lastRecord[0].toString());
-        SensorDataTypes sensorDataType = SensorDataTypes.valueOf(lastRecord[1].toString());
+        SensorDataTypes sensorDataType = SensorDataTypes.valueOf(lastRecord[1].toString().toUpperCase());
         double sensorMeasurementValue = Double.parseDouble(lastRecord[2].toString());
         Date recordTimestamp = dateFormat.parse(lastRecord[3].toString());
 

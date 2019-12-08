@@ -24,7 +24,7 @@ public class UserController {
      */
     @GET
     @Path("/users/{userID}")
-    public Response getPlantById(@PathParam("userID") String userId) {
+    public Response getUserById(@PathParam("userID") String userId) {
         try {
             IUser user = iUserService.getUserById(userId);
             return Response.status(200).entity(user).build();

@@ -23,19 +23,6 @@ public class UserService implements IUserService {
         userDao = new UserDao();
     }
 
-    // TODO: What's that? This shouldn't be here.
-    public void instanciateDaoIfNull(){
-        if(plantProfileDao == null){
-            plantProfileDao = new PlantProfileDao();
-        }
-        if(plantDao == null){
-            plantDao = new PlantDao();
-        }
-        if(userDao == null){
-            userDao = new UserDao();
-        }
-    }
-
     /**
      * Queries a database and returns a specific address
      *
@@ -43,7 +30,6 @@ public class UserService implements IUserService {
      * @return address
      */
     public IUser getUserById(String userID) throws SQLException, ParseException {
-        instanciateDaoIfNull();
         PlantProfileList profileList = plantProfileDao.getPlantProfiles(userID);
         PlantList plantList = plantDao.getPlants(userID);
         IUser user = new User(userID, profileList, plantList);
