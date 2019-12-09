@@ -33,4 +33,15 @@ public class UserController {
             return Response.status(500).build();
         }
     }
+
+    @POST
+    @Path("/login")
+    public Response login(IUser user){
+        try{
+            iUserService.login(user);
+        }catch (SQLException e){
+            e.printStackTrace();
+            return Response.status(500).build();
+        }
+    }
 }
