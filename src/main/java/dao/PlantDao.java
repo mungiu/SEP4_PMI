@@ -98,13 +98,15 @@ public class PlantDao {
      */
 
     private IPlant initializePlant(Object[] row) throws SQLException, ParseException {
+        //p.Plant_ID, p.Profile_ID, p.PlantName, p.Device_ID
         int plantId = Integer.parseInt(row[0].toString());
         // Todo: Add String deviceId = row[?].toString(); -> We need to retrieve id from the database
         int plantProfileId = Integer.parseInt(row[1].toString());
         String plantName = row[2].toString();
+        String deviceID = row[3].toString();
         PlantData[] plantData = getLatestPlantData(plantId);
 
-        return new Plant(plantId, "todo-device-id", plantName, plantProfileId, plantData[0], plantData[2], plantData[1], plantData[3]);
+        return new Plant(plantId, deviceID, plantName, plantProfileId, plantData[0], plantData[2], plantData[1], plantData[3]);
     }
 
     private PlantData initializePlantData(Object[] lastRecord, int plantId) throws ParseException {
