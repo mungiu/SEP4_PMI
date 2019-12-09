@@ -10,10 +10,10 @@ public class Queries {
 			"       PP.User_ID \n" +
 			//"       PD.ID, PD.Sensor_Type, PD.Sensor_Value, PD.TimeStamp\n" +
 			//"from dbo.Plant p left join dbo.PlantData PD on p.Plant_ID = PD.Plant_ID\n" +
-			"from dbo.Plant p left join dbo.PlantProfile PP on p.Profile_ID = PP.Profile_ID\n" +
+			"from SEP4_PMI.dbo.Plant p left join SEP4_PMI.dbo.PlantProfile PP on p.Profile_ID = PP.Profile_ID\n" +
 			"WHERE User_ID = ?;";
 
-	public static final String GET_PLANT_DATA_BY_TYPE_AND_PLANT_ID = "select top 1 PD.id, PD.sensor_type, PD.sensor_value, PD.timestamp from dbo.PlantData PD where PD.Sensor_Type = ? AND PD.Plant_ID = ? ORDER BY PD.TimeStamp DESC;";
+	public static final String GET_PLANT_DATA_BY_TYPE_AND_PLANT_ID = "select top 1 PD.Data_ID, PD.sensor_type, PD.sensor_value, PD.timestamp from SEP4_PMI.dbo.PlantData PD where PD.Sensor_Type = ? AND PD.Plant_ID = ? ORDER BY PD.TimeStamp DESC;";
 	public static final String CREATE_PLANT = "insert into dbo.Plant(Plant_ID ,Profile_ID, PlantName) values (?,?,?);";
 	public static final String UPDATE_PLANT = "update dbo.Plant set Plant_ID = ?, Profile_ID = ?, PlantName = ? where Plant_ID = ?;";
 	public static final String DELETE_PLANT = "delete from dbo.Plant where Plant_ID = ?;";
@@ -23,7 +23,7 @@ public class Queries {
 			"PP.Hum_Max, PP.Hum_Min, "+
 			"PP.Tem_Max, PP.Tem_Min, "+
 			"PP.Light_Max, PP.Light_Min "+
-			"from dbo.PlantProfile PP where user_ID = ?;";
+			"from SEP4_PMI.dbo.PlantProfile PP where user_ID = ?;";
 	public static final String CREATE_PLANT_PROFILE = "insert into dbo.PlantProfile (User_ID, Profile_Name, CO2_Max, CO2_Min, Hum_Max, Hum_Min, Tem_Max, Tem_Min, Light_Max, Light_Min) values (?,?,?,?,?,?,?,?,?,?);";
 	public static final String UPDATE_PLANT_PROFILE = "update dbo.PlantProfile set User_ID = ?, Profile_Name = ?, CO2_Max = ?, CO2_Min = ?, Hum_Max = ?, Hum_Min = ?, Tem_Max = ?, Tem_Min = ?, Light_Max = ?, Light_Min = ? where Profile_ID = ?;";
 	public static final String DELETE_PLANT_PROFILE = "delete from dbo.PlantProfile where Profile_ID = ?;";
