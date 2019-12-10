@@ -39,6 +39,7 @@ public class UserController {
     public Response login(IUser user){
         try{
             iUserService.login(user);
+            return Response.status(200).entity(user).build();
         }catch (SQLException e){
             e.printStackTrace();
             return Response.status(500).build();

@@ -10,4 +10,6 @@ public interface IUserService {
     void deleteUser(String userID) throws  SQLException;
     void updateUser(IUser user) throws  SQLException;
     void createUser(IUser user) throws SQLException;
+
+    void login(IUser user);
 }
