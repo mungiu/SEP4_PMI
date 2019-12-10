@@ -3,6 +3,8 @@ package controller;
 import model.domain.IUser;
 import service.IUserService;
 import service.UserService;
+import utils.exceptions.InvalidPasswordException;
+import utils.exceptions.UserNotFoundException;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
@@ -39,10 +41,10 @@ public class UserController {
     public Response login(IUser user){
         try{
             iUserService.login(user);
-            return Response.status(200).entity(user).build();
-        }catch (SQLException e){
+            return Response.status(200).build();
+        }catch (SQLException | InvalidPasswordException | UserNotFoundException e){
             e.printStackTrace();
-            return Response.status(500).build();
+            return Response.status(500).entity(e).build();
         }
     }
 }

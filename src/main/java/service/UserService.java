@@ -7,6 +7,8 @@ import model.domain.IUser;
 import model.PlantList;
 import model.PlantProfileList;
 import model.domain.User;
+import utils.exceptions.InvalidPasswordException;
+import utils.exceptions.UserNotFoundException;
 
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -50,4 +52,18 @@ public class UserService implements IUserService {
     public void createUser(IUser plant) throws SQLException {
         // TODO
     }
+
+    @Override
+    public boolean login(IUser user) throws InvalidPasswordException, UserNotFoundException, SQLException {
+            if(userDao.userExists(user.getEmail())){
+                if(userDao.validLogin(user)){
+                    return true;
+                }
+                else {
+                    throw new InvalidPasswordException();
+                }
+            }else {
+                throw new UserNotFoundException();
+            }
+       }
 }
