@@ -25,8 +25,6 @@ public class PlantDaoTest {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
         }
     }
 
@@ -35,15 +33,13 @@ public class PlantDaoTest {
         try {
             PlantProfile profile = new PlantProfile();
             profile.setId(3);
-            Plant plant = new Plant("plant test",profile);
+            Plant plant = new Plant("DEVICEIDTEST123","plant test",profile.getId());
             dao.createPlant(plant);
             PlantList plantList = dao.getPlants("naya7777@gmail.com");
             for (int i = 0; i < plantList.size(); i++) {
                 System.out.println(plantList.getPlant(i).getPlantName());
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
             e.printStackTrace();
         }
     }

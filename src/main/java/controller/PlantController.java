@@ -50,7 +50,10 @@ public class PlantController {
 		try {
 			iPlantService.createPlant(plant);
 			return Response.status(200).build();
-		} catch (SQLException | MissingDataException e) {
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return Response.status(500).entity(e.getMessage()).build();
+		}catch (MissingDataException e){
 			e.printStackTrace();
 			return Response.status(500).entity(e.getMessage()).build();
 		}
@@ -65,7 +68,10 @@ public class PlantController {
 		try {
 			iPlantService.updatePlant(plant);
 			return Response.status(200).build();
-		} catch (SQLException | MissingDataException e) {
+		} catch (MissingDataException e) {
+			e.printStackTrace();
+			return Response.status(500).entity(e.getMessage()).build();
+		} catch (SQLException e){
 			e.printStackTrace();
 			return Response.status(500).entity(e.getMessage()).build();
 		}

@@ -2,8 +2,8 @@ package model;
 
 public enum SensorDataTypes {
     CO2("CO2"),
-    HUM("Humidity"),
-    TEMP("Temperature"),
+    HUMIDITY("Humidity"),
+    TEMPERATURE("Temperature"),
     LIGHT("Light");
 
     private String value;

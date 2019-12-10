@@ -24,11 +24,22 @@ public class UserController {
      */
     @GET
     @Path("/users/{userID}")
-    public Response getPlantById(@PathParam("userID") String userId) {
+    public Response getUserById(@PathParam("userID") String userId) {
         try {
             IUser user = iUserService.getUserById(userId);
             return Response.status(200).entity(user).build();
         } catch (SQLException | ParseException e) {
+            e.printStackTrace();
+            return Response.status(500).build();
+        }
+    }
+
+    @POST
+    @Path("/login")
+    public Response login(IUser user){
+        try{
+            iUserService.login(user);
+        }catch (SQLException e){
             e.printStackTrace();
             return Response.status(500).build();
         }

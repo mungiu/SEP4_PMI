@@ -2,6 +2,7 @@ import dao.PlantProfileDao;
 import model.PlantProfileList;
 import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.*;
 
 import java.sql.SQLException;
 
@@ -18,6 +19,7 @@ public class PlantProfileDaoTest {
     public void testGetProfiles(){
         try{
             PlantProfileList profileList = dao.getPlantProfiles("naya7777@gmail.com");
+            assertEquals("flower3",profileList.getPlantProfiles().get(0).getName());
         } catch (SQLException e){
             e.printStackTrace();
         }
