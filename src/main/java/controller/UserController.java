@@ -40,8 +40,8 @@ public class UserController {
     @Path("/login")
     public Response login(IUser user){
         try{
-            iUserService.login(user);
-            return Response.status(200).build();
+            boolean loginSucceed = iUserService.login(user);
+            return Response.status(200).entity(loginSucceed).build();
         }catch (SQLException | InvalidPasswordException | UserNotFoundException e){
             e.printStackTrace();
             return Response.status(500).entity(e).build();
