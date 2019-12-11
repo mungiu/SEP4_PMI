@@ -27,7 +27,7 @@ public class PlantDao {
      */
 
     public void createPlant(IPlant plant) throws SQLException {
-        db.update(Queries.CREATE_PLANT, plant.getPlantProfileId(), plant.getDeviceId(), plant.getPlantName());
+        db.update(Queries.CREATE_PLANT, plant.getDeviceId(), plant.getPlantProfileId(), plant.getPlantName());
     }
 
     /**
