@@ -4,6 +4,7 @@ import model.domain.IUser;
 import service.IUserService;
 import service.UserService;
 import utils.exceptions.InvalidPasswordException;
+import utils.exceptions.UserAlreadyExists;
 import utils.exceptions.UserNotFoundException;
 
 import javax.ws.rs.*;
@@ -43,6 +44,20 @@ public class UserController {
             boolean loginSucceed = iUserService.login(user);
             return Response.status(200).entity(loginSucceed).build();
         }catch (SQLException | InvalidPasswordException | UserNotFoundException e){
+            e.printStackTrace();
+            return Response.status(500).entity(e).build();
+        }
+    }
+
+    @POST
+    @Path("/users")
+    public Response createUser(IUser user){
+        try{
+            boolean signUpSucceed = iUserService.createUser(user);
+            return Response.status(200).entity(signUpSucceed).build();
+
+
+        } catch (SQLException | UserAlreadyExists e) {
             e.printStackTrace();
             return Response.status(500).entity(e).build();
         }
