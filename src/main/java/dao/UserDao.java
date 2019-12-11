@@ -35,4 +35,8 @@ public class UserDao {
             return false;
         }
     }
+
+    public void createUser(IUser user) throws SQLException {
+        db.query(Queries.CREATE_USER, user.getEmail(), user.getPassword());
+    }
 }

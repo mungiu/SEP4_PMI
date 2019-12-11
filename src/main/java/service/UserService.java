@@ -8,6 +8,7 @@ import model.PlantList;
 import model.PlantProfileList;
 import model.domain.User;
 import utils.exceptions.InvalidPasswordException;
+import utils.exceptions.UserAlreadyExists;
 import utils.exceptions.UserNotFoundException;
 
 import java.sql.SQLException;
@@ -49,8 +50,13 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public void createUser(IUser plant) throws SQLException {
-        // TODO
+    public boolean createUser(IUser user) throws SQLException, UserAlreadyExists {
+        if (!userDao.userExists(user.getEmail())){
+            userDao.createUser(user);
+            return true;
+        }else {
+            throw new UserAlreadyExists();
+        }
     }
 
     @Override
