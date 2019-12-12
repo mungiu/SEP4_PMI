@@ -2,9 +2,9 @@ package utils;
 
 public class Queries {
 
-	public static final String GET_PLANTS_BY_USER_ID = "SELECT p.Plant_ID, p.Profile_ID, p.PlantName, p.Device_ID FROM SEP4_PMI.dbo.PlantProfile PP"+
-	"right join SEP4_PMI.dbo.Plant p on p.Profile_ID = PP.Profile_ID"+
-	"left join SEP4_PMI.dbo.[Users] u on PP.[User_ID] = u.[User_ID]"+
+	public static final String GET_PLANTS_BY_USER_ID = "SELECT p.Plant_ID, p.Profile_ID, p.PlantName, p.Device_ID FROM SEP4_PMI.dbo.PlantProfile PP "+
+	"right join SEP4_PMI.dbo.Plant p on p.Profile_ID = PP.Profile_ID "+
+	"left join SEP4_PMI.dbo.[Users] u on PP.[User_ID] = u.[User_ID] "+
 	"WHERE Email = ?;";
 
 	public static final String GET_PLANT_DATA_BY_TYPE_AND_PLANT_ID = "select top 1 PD.Data_ID, PD.sensor_type, PD.sensor_value, PD.timestamp from SEP4_PMI.dbo.PlantData PD where PD.Sensor_Type = ? AND PD.Plant_ID = ? ORDER BY PD.TimeStamp DESC;";
