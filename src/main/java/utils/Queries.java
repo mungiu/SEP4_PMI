@@ -21,7 +21,7 @@ public class Queries {
 			"from SEP4_PMI.dbo.PlantProfile PP where Email = ?;";
 	public static final String CREATE_PLANT_PROFILE = "insert into SEP4_PMI.dbo.PlantProfile (User_ID, Profile_Name, CO2_Max, CO2_Min, Hum_Max, Hum_Min, Tem_Max, Tem_Min, Light_Max, Light_Min)\n" +
 			"values ((SELECT [User_ID] FROM SEP4_PMI.dbo.[Users] WHERE Email=?), ? , ?, ?, ?, ?, ?, ?, ? ,?);";
-	public static final String UPDATE_PLANT_PROFILE = "update SEP4_PMI.dbo.PlantProfile set User_ID = ?, Profile_Name = ?, CO2_Max = ?, CO2_Min = ?, Hum_Max = ?, Hum_Min = ?, Tem_Max = ?, Tem_Min = ?, Light_Max = ?, Light_Min = ? where Profile_ID = ?;";
+	public static final String UPDATE_PLANT_PROFILE = "update SEP4_PMI.dbo.PlantProfile set Profile_Name = ?, CO2_Min = ?, CO2_Max = ?, Hum_Min = ?, Hum_Max = ?, Tem_Min = ?, Tem_Max = ?, Light_Min = ?, Light_Max = ? where Profile_ID = ?;";
 	public static final String DELETE_PLANT_PROFILE = "delete from SEP4_PMI.dbo.PlantProfile where Profile_ID = ?;";
 
 	public static final String GET_USER_ID_BY_EMAIL = "SELECT [User_ID] FROM SEP4_PMI.dbo.[Users] WHERE Email=?;\n";
