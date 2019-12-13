@@ -30,7 +30,7 @@ public class Queries {
 	public static final String GET_USER = "select * from SEP4_PMI.dbo.Users where User_ID = ?;";
 	public static final String CREATE_USER = "insert into SEP4_PMI.dbo.Users(Email, Password) values (?,?);";
 	public static final String UPDATE_USER = "update SEP4_PMI.dbo.Users set User_ID = ?, Password = ? where User_ID = ?;";
-	public static final String DELETE_USER = "delete from SEP4_PMI.dbo.Users where User_ID = ?;";
+	public static final String DELETE_USER = "delete from SEP4_PMI.dbo.Users where Email = ?;";
 
 	public static final String GET_PLANTINFO = "select * from SEP4_PMI.dbo.PlantInfo where ID = ?;";
 	public static final String CREATE_PLANTINFO = "insert into SEP4_PMI.dbo.PlantInfo(Plant_ID, Sensor_Type, Sensor_Value, TimeStamp) values (?,?,?,?);";/*CURRENT_TIMESTAMP instead of the last ? If you want the stamp from the Microsoft SQL server. Else retreive before on java server or device.*/

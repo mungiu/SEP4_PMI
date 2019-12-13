@@ -40,8 +40,8 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public void deleteUser(String userID) throws SQLException {
-        // TODO
+    public void deleteUser(String email) throws SQLException {
+        userDao.delete(email);
     }
 
     @Override
@@ -72,4 +72,5 @@ public class UserService implements IUserService {
                 throw new UserNotFoundException();
             }
        }
+
 }

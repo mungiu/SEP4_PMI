@@ -37,6 +37,9 @@ public class UserDao {
     }
 
     public void createUser(IUser user) throws SQLException {
-        db.query(Queries.CREATE_USER, user.getEmail(), user.getPassword());
+        db.update(Queries.CREATE_USER, user.getEmail(), user.getPassword());
+    }
+    public void delete(String email) throws SQLException {
+        db.update(Queries.DELETE_USER, email);
     }
 }
