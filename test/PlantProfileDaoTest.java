@@ -19,7 +19,7 @@ public class PlantProfileDaoTest {
     public void testGetProfiles(){
         try{
             PlantProfileList profileList = dao.getPlantProfiles("naya7777@gmail.com");
-            assertEquals("flower3",profileList.getPlantProfiles().get(0).getName());
+            assertEquals("naya flower 1",profileList.getPlantProfiles().get(0).getName());
         } catch (SQLException e){
             e.printStackTrace();
         }
