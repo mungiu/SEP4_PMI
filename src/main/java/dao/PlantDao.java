@@ -36,7 +36,7 @@ public class PlantDao {
      * @param plantID
      */
 
-    public void deletePlant(String plantID) throws SQLException {
+    public void deletePlant(int plantID) throws SQLException {
         db.update(Queries.DELETE_PLANT, plantID);
     }
 
@@ -100,7 +100,6 @@ public class PlantDao {
     private IPlant initializePlant(Object[] row) throws SQLException, ParseException {
         //p.Plant_ID, p.Profile_ID, p.PlantName, p.Device_ID
         int plantId = Integer.parseInt(row[0].toString());
-        // Todo: Add String deviceId = row[?].toString(); -> We need to retrieve id from the database
         int plantProfileId = Integer.parseInt(row[1].toString());
         String plantName = row[2].toString();
         String deviceID = row[3].toString();
@@ -111,7 +110,6 @@ public class PlantDao {
 
     private PlantData initializePlantData(Object[] lastRecord, int plantId) throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
         int plantDataId = Integer.parseInt(lastRecord[0].toString());
         SensorDataTypes sensorDataType = SensorDataTypes.valueOf(lastRecord[1].toString().toUpperCase());
         double sensorMeasurementValue = Double.parseDouble(lastRecord[2].toString());
@@ -120,7 +118,8 @@ public class PlantDao {
         return new PlantData(plantDataId, sensorMeasurementValue, sensorDataType, plantId, recordTimestamp);
     }
 
-    public IPlant getPlantById(String plantID) {
+    public IPlant getPlantById(int plantID) {
+        //TODO
         return null;
     }
 }

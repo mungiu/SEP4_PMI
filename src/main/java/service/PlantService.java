@@ -20,7 +20,7 @@ public class PlantService implements IPlantService {
      * @throws SQLException
      */
     @Override
-    public IPlant getPlantById(String plantID) throws SQLException {
+    public IPlant getPlantById(int plantID) throws SQLException {
         return dao.getPlantById(plantID);
     }
 
@@ -43,7 +43,7 @@ public class PlantService implements IPlantService {
      * todo
      */
     @Override
-    public void deletePlant(String plantID) throws SQLException {
+    public void deletePlant(int plantID) throws SQLException {
     	dao.deletePlant(plantID);
     }
 
