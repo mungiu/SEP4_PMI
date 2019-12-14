@@ -43,7 +43,7 @@ public class UserDao {
         db.update(Queries.DELETE_USER, email);
     }
 
-    public void update(IUser user)throws  SQLException{
-        db.update(Queries.UPDATE_USER, user.getEmail(),user.getPassword(),user.getEmail());
+    public void updateUser(IUser user) throws SQLException {
+        db.update(Queries.UPDATE_USER, user.getEmail(), user.getPassword());
     }
 }
