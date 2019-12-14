@@ -68,11 +68,11 @@ public class PlantProfileDao {
 	public void updatePlantProfile(PlantProfile plantProfile) throws SQLException{
 		// TODO Auto-generated method stub
 		try{
-			db.update(Queries.UPDATE_PLANT_PROFILE, plantProfile.getId(), plantProfile.getUserEmail(),
+			db.update(Queries.UPDATE_PLANT_PROFILE, plantProfile.getName(),
 					plantProfile.getCo2Boundaries().getMin(), plantProfile.getCo2Boundaries().getMax(),
-					plantProfile.getTemperatureBoundaries().getMin(),plantProfile.getTemperatureBoundaries().getMin(),
+					plantProfile.getTemperatureBoundaries().getMin(),plantProfile.getTemperatureBoundaries().getMax(),
 					plantProfile.getHumidityBoundaries().getMin(), plantProfile.getHumidityBoundaries().getMax(),
-					plantProfile.getLightBoundaries().getMax(), plantProfile.getLightBoundaries().getMin());
+					plantProfile.getLightBoundaries().getMin(), plantProfile.getLightBoundaries().getMax(), plantProfile.getId());
 		}catch (SQLException e){
 			throw e;
 		}

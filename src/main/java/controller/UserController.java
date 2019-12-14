@@ -62,4 +62,16 @@ public class UserController {
             return Response.status(500).entity(e).build();
         }
     }
+    @DELETE
+    @Path("/users/{email}")
+    public Response deleteUser(@PathParam("email") String email){
+        try{
+            iUserService.deleteUser(email);
+            return Response.status(200).build();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return Response.status(500).entity(e).build();
+        }
+    }
 }
