@@ -42,4 +42,8 @@ public class UserDao {
     public void delete(String email) throws SQLException {
         db.update(Queries.DELETE_USER, email);
     }
+
+    public void update(IUser user)throws  SQLException{
+        db.update(Queries.UPDATE_USER, user.getEmail(),user.getPassword(),user.getEmail());
+    }
 }

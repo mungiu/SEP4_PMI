@@ -1,59 +1,93 @@
-package dao;
+package service;
 
-import model.domain.IUser;
+import dao.UserDao;
 import model.domain.User;
-import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.asset.EmptyAsset;
-import org.jboss.shrinkwrap.api.spec.JavaArchive;
-import org.junit.Assert;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import utils.Queries;
 
+import static org.junit.Assert.*;
+
+import utils.exceptions.InvalidPasswordException;
+import utils.exceptions.UserAlreadyExists;
+import utils.exceptions.UserNotFoundException;
+
+import java.sql.SQLDataException;
 import java.sql.SQLException;
+import java.text.ParseException;
 
 import static org.junit.Assert.*;
 
 public class UserDaoTest {
-//    @Deployment
-//    public static JavaArchive createDeployment() {
-//        return ShrinkWrap.create(JavaArchive.class)
-//                .addClass(UserDao.class)
-//                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
-//    }
 
-    User user = new User();
-    UserDao userDao = new UserDao();
+    User user1;
+    UserDao dao;
+    User userCreate;
+
+    @Before
+    public void setUp() throws Exception {
+        user1 = new User("test1@gmail.com", "1111");
+        dao = new UserDao();
+        dao.createUser(user1);
+        userCreate = new User("testCreateUser@gmail.com","1234567890");
+    }
+
+    @After
+    public void tearDown() throws SQLException {
+        dao.delete(user1.getEmail());
+        dao.delete(userCreate.getEmail());
+    }
 
     @Test
-    public void userExists() throws SQLException {
-
-       // user.setEmail("ziad7777@gmail.com");
-        Assert.assertTrue(userDao.userExists("ziad7777@gmail.com"));
+    public void createUserIfDoesntExist() {
+        try {
+            dao.createUser(userCreate);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 
     @Test
-    public void validLogin() throws SQLException {
-        user.setEmail("ziad7777@gmail.com");
-        user.setPassword("23456");
-        IUser iUser = null;
-        Assert.assertTrue(userDao.validLogin(user));
-
-
+    public void userExistsTestWhenExists() {
+        try {
+            assertTrue(dao.userExists(user1.getEmail()));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
-    public void createUser() throws SQLException {
-        IUser iUser = null;
-        user.setEmail("testZiad7777@gmail.com");
-        user.setPassword("test23456");
-//      userDao.createUser(user);
-//      assertNotNull(user);
-       // Assert.assertTrue(userDao.createUser();
-        //assertEquals("test23456", user.getPassword());
+    public void userExistsTestWhenNotExists() {
+        try {
+            assertFalse(dao.userExists(userCreate.getEmail()));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
+    @Test
+    public void ifValidWhenUserIsValid() {
+        try {
+            assertTrue(dao.validLogin(user1));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void ifValidWhenUserIsNotValid() {
+        try {
+            assertFalse(dao.validLogin(userCreate));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void login() throws SQLException, UserNotFoundException, InvalidPasswordException {
+        dao.createUser(user1);
+        dao.validLogin(user1);
+        assertTrue(userService.login(user1));
     }
 }
