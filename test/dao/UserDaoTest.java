@@ -1,8 +1,10 @@
-package service;
+package dao;
 
 import dao.UserDao;
+import model.domain.IUser;
 import model.domain.User;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -85,9 +87,39 @@ public class UserDaoTest {
     }
 
     @Test
-    public void login() throws SQLException, UserNotFoundException, InvalidPasswordException {
-        dao.createUser(user1);
-        dao.validLogin(user1);
-        assertTrue(userService.login(user1));
+    public void userUpdateEmail() {
+        try {
+            String currentEmail = user1.getEmail();
+            user1.setEmail("testUpdated@gmail.com");
+            dao.updateUser(currentEmail, user1);
+            IUser temp = dao.getUserByEmail(user1.getEmail());
+            assertEquals(user1.getEmail(),temp.getEmail());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void userUpdatePassword() {
+        try {
+            user1.setPassword("98765432");
+            dao.updateUser(user1.getEmail(), user1);
+            IUser temp = dao.getUserByEmail(user1.getEmail());
+            assertEquals("98765432",temp.getPassword());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void getUserByEmailTest() throws SQLException {
+        IUser temp = dao.getUserByEmail(user1.getEmail());
+        assertEquals("1111",temp.getPassword());
+    }
+
+    @Test
+    public void deleteUserThatExists() throws SQLException {
+        dao.delete(user1.getEmail());
+        assertEquals(null, dao.getUserByEmail(user1.getEmail()));
     }
 }

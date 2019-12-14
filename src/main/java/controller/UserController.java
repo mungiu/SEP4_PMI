@@ -77,10 +77,10 @@ public class UserController {
         }
     }
     @PUT
-    @Path("/users")
-    public Response updateUser(IUser user) {
+    @Path("/users/{email}")
+    public Response updateUser(@PathParam("email") String email, IUser user) {
         try {
-            iUserService.updateUser(user);
+            iUserService.updateUser(email, user);
             return Response.status(200).build();
         } catch (SQLException e){
             e.printStackTrace();

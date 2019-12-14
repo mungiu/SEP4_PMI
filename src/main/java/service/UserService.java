@@ -45,8 +45,8 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public void updateUser(IUser user) throws SQLException {
-        userDao.updateUser(user);
+    public void updateUser(String email ,IUser user) throws SQLException {
+        userDao.updateUser(email, user);
     }
 
     @Override
