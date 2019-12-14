@@ -31,7 +31,7 @@ public class PlantController {
 	 */
 	@GET
 	@Path("/plants/{plantID}")
-	public Response getPlantById(@PathParam("plantID") String plantID) {
+	public Response getPlantByIdWIthWeekAvg(@PathParam("plantID") int plantID) {
 		try {
 			IPlant plant = iPlantService.getPlantById(plantID);
 			return Response.status(200).entity(plant).build();
@@ -82,7 +82,7 @@ public class PlantController {
 	 */
 	@DELETE
 	@Path("/plants/{plantID}")
-	public Response deletePlant(@PathParam("plantID") String plantID) {
+	public Response deletePlant(@PathParam("plantID") int plantID) {
 		try {
 			iPlantService.deletePlant(plantID);
 			return Response.status(200).build();

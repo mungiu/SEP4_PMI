@@ -15,7 +15,6 @@ import java.sql.SQLException;
 import java.text.ParseException;
 
 public class UserService implements IUserService {
-    // TODO: What's that? This shouldn't be here.
     public PlantDao plantDao;
     public PlantProfileDao plantProfileDao;
     public UserDao userDao;

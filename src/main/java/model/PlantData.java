@@ -26,6 +26,12 @@ public class PlantData {
         this.measurementTimestamp = measurementTimestamp;
     }
 
+	public PlantData(double measurementValue, SensorDataTypes sensorDataType, int plantId) {
+		this.measurementValue = measurementValue;
+		this.sensorDataType = sensorDataType;
+		this.plantId = plantId;
+	}
+
 	public int getId() {
 		return id;
 	}

@@ -5,6 +5,10 @@ public class SensorBoundaries {
 	private double max;
 	private double min;
 
+	public SensorBoundaries(){
+
+	}
+
 	public SensorBoundaries(double min, double max) {
 		this.max = max;
 		this.min = min;
