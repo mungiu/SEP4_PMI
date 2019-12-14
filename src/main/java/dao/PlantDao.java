@@ -118,8 +118,23 @@ public class PlantDao {
         return new PlantData(plantDataId, sensorMeasurementValue, sensorDataType, plantId, recordTimestamp);
     }
 
-    public IPlant getPlantById(int plantID) {
-        //TODO
-        return null;
+    public IPlant getPlantById(int plantID) throws SQLException {
+        ArrayList<Object[]> result = db.query(Queries.GET_WEEKLY_AVG_VIEW_BY_PLANT, plantID);
+        Plant plant = null;
+        if(result.size() == 1){
+            String deviceId = result.get(0)[0].toString();
+            int profileId = Integer.parseInt(result.get(0)[1].toString());
+            String plantName = result.get(0)[2].toString();
+            double co2Value = Double.parseDouble(result.get(0)[3].toString());
+            double humidityValue = Double.parseDouble(result.get(0)[4].toString());
+            double temperatureValue = Double.parseDouble(result.get(0)[5].toString());
+            double lightValue = Double.parseDouble(result.get(0)[6].toString());
+            PlantData co2 = new PlantData(co2Value, SensorDataTypes.CO2, plantID);
+            PlantData humidity = new PlantData(humidityValue, SensorDataTypes.HUMIDITY, plantID);
+            PlantData temperature = new PlantData(temperatureValue, SensorDataTypes.TEMPERATURE, plantID);
+            PlantData light = new PlantData(lightValue, SensorDataTypes.LIGHT, plantID);
+            plant = new Plant(plantID,deviceId,plantName,profileId,co2,temperature,humidity,light);
+        }
+        return plant;
     }
 }
