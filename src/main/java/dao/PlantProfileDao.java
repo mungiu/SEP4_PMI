@@ -78,7 +78,7 @@ public class PlantProfileDao {
 		}
 	}
 
-	public void deletePlantProfile(String plantProfileID) throws SQLException{
+	public void deletePlantProfile(int plantProfileID) throws SQLException{
 		try{
 			db.update(Queries.DELETE_PLANT_PROFILE,plantProfileID);
 		}
@@ -111,7 +111,7 @@ public class PlantProfileDao {
 		);
 	}
 
-	public PlantProfile getPlantProfileById(String plantID) throws SQLException{
+	public PlantProfile getPlantProfileById(int profileId) throws SQLException{
 		return null;
 	}
 }

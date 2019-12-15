@@ -24,9 +24,9 @@ public class PlantProfileController {
 	 */
 	@GET
 	@Path("/plantprofiles/{plantProfileID}")
-	public Response getPlantProfileById(@PathParam("plantProfileID") String plantID) {
+	public Response getPlantProfileById(@PathParam("plantProfileID") int profileId) {
 		try {
-			PlantProfile plant = iPlantProfileService.getPlantProfileById(plantID);
+			PlantProfile plant = iPlantProfileService.getPlantProfileById(profileId);
 			// TODO: Uncomment the bellow method when we're able to receive a plant profile from the database
 			// return Response.status(200).entity(plant).build();
 			return Response.status(200).entity("Response from the getPlantProfileById method").build();
@@ -71,7 +71,7 @@ public class PlantProfileController {
 	 */
 	@DELETE
 	@Path("/plantprofiles/{plantProfileID}")
-	public Response deletePlantProfile(@PathParam("plantProfileID") String plantProfileID) {
+	public Response deletePlantProfile(@PathParam("plantProfileID") int plantProfileID) {
 		try {
 			iPlantProfileService.deletePlantProfile(plantProfileID);
 			return Response.status(200).build();
