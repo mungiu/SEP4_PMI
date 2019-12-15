@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 
 public interface IUserService {
-    IUser getUserById(String userID) throws SQLException, ParseException;
+    IUser getUserById(String userID) throws SQLException, ParseException, UserNotFoundException;
     void deleteUser(String email) throws  SQLException;
     void updateUser(String email,IUser user) throws  SQLException;
     boolean createUser(IUser user) throws SQLException, UserAlreadyExists;

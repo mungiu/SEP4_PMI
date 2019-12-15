@@ -31,11 +31,15 @@ public class UserService implements IUserService {
      * @param userID of the address to be returned
      * @return address
      */
-    public IUser getUserById(String userID) throws SQLException, ParseException {
-        PlantProfileList profileList = plantProfileDao.getPlantProfiles(userID);
-        PlantList plantList = plantDao.getPlants(userID);
-        IUser user = new User(userID, profileList, plantList);
-        return user;
+    public IUser getUserById(String userID) throws SQLException, ParseException, UserNotFoundException {
+        if(userDao.userExists(userID)){
+            PlantProfileList profileList = plantProfileDao.getPlantProfiles(userID);
+            PlantList plantList = plantDao.getPlants(userID);
+            IUser user = new User(userID, profileList, plantList);
+            return user;
+        } else{
+            throw new UserNotFoundException();
+        }
     }
 
     @Override
