@@ -17,7 +17,7 @@ public class PlantList
         this.plants = plants;
     }
 
-    public List<IPlant> getClients() {
+    public List<IPlant> getPlants() {
         return plants;
     }
     public IPlant getPlant(int index){

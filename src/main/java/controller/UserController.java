@@ -58,11 +58,9 @@ public class UserController {
         try{
             boolean signUpSucceed = iUserService.createUser(user);
             return Response.status(200).entity(signUpSucceed).build();
-
-
-        } catch (SQLException | UserAlreadyExists e) {
+        } catch (SQLException | UserAlreadyExists | MissingDataException e) {
             e.printStackTrace();
-            return Response.status(500).entity(e).build();
+            return Response.status(500).entity(e.getMessage()).build();
         }
     }
     @DELETE

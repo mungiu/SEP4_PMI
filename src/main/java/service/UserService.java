@@ -8,6 +8,7 @@ import model.PlantList;
 import model.PlantProfileList;
 import model.domain.User;
 import utils.exceptions.InvalidPasswordException;
+import utils.exceptions.MissingDataException;
 import utils.exceptions.UserAlreadyExists;
 import utils.exceptions.UserNotFoundException;
 
@@ -53,10 +54,14 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public boolean createUser(IUser user) throws SQLException, UserAlreadyExists {
+    public boolean createUser(IUser user) throws SQLException, UserAlreadyExists, MissingDataException {
         if (!userDao.userExists(user.getEmail())){
-            userDao.createUser(user);
-            return true;
+            if(isValid(user)) {
+                userDao.createUser(user);
+                return true;
+            } else {
+                throw new MissingDataException("Please fill out the form with valid information");
+            }
         }else {
             throw new UserAlreadyExists();
         }
@@ -75,5 +80,11 @@ public class UserService implements IUserService {
                 throw new UserNotFoundException();
             }
        }
+
+    private boolean isValid(IUser user) {
+        return user != null
+                && user.getEmail() != null && user.getPassword() != null
+                && user.getEmail().trim().length() != 0 && user.getPassword().trim().length() != 0;
+    }
 
 }

@@ -16,7 +16,7 @@ public class PlantProfileDao {
 	}
 
 	
-	public void createPlantProfile(PlantProfile plantProfile) throws SQLException{
+	public void createPlantProfile(IPlantProfile plantProfile) throws SQLException{
 		try {
 			db.update(Queries.CREATE_PLANT_PROFILE, plantProfile.getUserEmail(), plantProfile.getName(),
 					plantProfile.getCo2Boundaries().getMax(), plantProfile.getCo2Boundaries().getMin(),

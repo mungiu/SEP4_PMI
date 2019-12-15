@@ -7,6 +7,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import utils.exceptions.InvalidPasswordException;
+import utils.exceptions.MissingDataException;
 import utils.exceptions.UserAlreadyExists;
 import utils.exceptions.UserNotFoundException;
 
@@ -21,7 +22,7 @@ public class UserServiceTest {
     IUserService service;
 
     @Before
-    public void setUp() throws SQLException, UserAlreadyExists {
+    public void setUp() throws SQLException, UserAlreadyExists, MissingDataException {
         user1 = new User("testUserService@gmail.com", "1111");
         service = new UserService();
         service.createUser(user1);
@@ -65,7 +66,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testCreateNewUser() throws SQLException, UserAlreadyExists, ParseException, UserNotFoundException {
+    public void testCreateNewUser() throws SQLException, UserAlreadyExists, ParseException, UserNotFoundException, MissingDataException {
         service.createUser(userCreate);
         IUser userFromDb = service.getUserById("testCreateUserService@gmail.com");
         assertEquals("testCreateUserService@gmail.com", userFromDb.getEmail());
@@ -78,10 +79,21 @@ public class UserServiceTest {
     }
 
     @Test (expected = UserAlreadyExists.class)
-    public void testCreateUserThatAlreadyExist() throws SQLException, UserAlreadyExists {
+    public void testCreateUserThatAlreadyExist() throws SQLException, UserAlreadyExists, MissingDataException {
         service.createUser(user1);
     }
 
+    @Test (expected = MissingDataException.class)
+    public void testCreateUserWithMissingEmail() throws MissingDataException, SQLException, UserAlreadyExists {
+        userCreate.setPassword("");
+        service.createUser(userCreate);
+    }
+
+    @Test (expected = MissingDataException.class)
+    public void testCreateUserWithMissingPassword() throws MissingDataException, SQLException, UserAlreadyExists {
+        userCreate.setEmail("");
+        service.createUser(userCreate);
+    }
 
 
 }
