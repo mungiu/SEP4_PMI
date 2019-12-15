@@ -28,7 +28,10 @@ public class PlantService implements IPlantService {
      * todo
      */
     public void createPlant(IPlant plant) throws SQLException {
-    	dao.createPlant(plant);
+    	if(isValid(plant))
+        {
+            dao.createPlant(plant);
+        }
     }
 
     /**
@@ -36,7 +39,10 @@ public class PlantService implements IPlantService {
      */
     @Override
     public void updatePlant(IPlant plant) throws SQLException {
-    	dao.updatePlant(plant);
+    	if(isValid(plant))
+    	{
+            dao.updatePlant(plant);
+        }
     }
 
     /**
@@ -45,6 +51,12 @@ public class PlantService implements IPlantService {
     @Override
     public void deletePlant(int plantID) throws SQLException {
     	dao.deletePlant(plantID);
+    }
+
+    private boolean isValid(IPlant plant){
+        return plant != null && plant.getDeviceId() != null && plant.getDeviceId().trim().length() != 0
+                && plant.getPlantName() != null && plant.getPlantName().trim().length() != 0
+                && plant.getPlantProfileId() != 0;
     }
 
 
