@@ -60,7 +60,7 @@ public class UserServiceTest {
 
     @Test (expected = InvalidPasswordException.class)
     public void testInvalidPassword() throws SQLException, UserNotFoundException, InvalidPasswordException {
-        user1.setPassword("wrongpasssword456789");
+        user1.setPassword("wrongpassword456789");
         service.login(user1);
     }
 
@@ -71,11 +71,17 @@ public class UserServiceTest {
         assertEquals("testCreateUserService@gmail.com", userFromDb.getEmail());
     }
 
-    @Test
+    @Test (expected = UserNotFoundException.class)
     public void testDeleteUser() throws SQLException, ParseException, UserNotFoundException {
         service.deleteUser(user1.getEmail());
-        IUser userFromDb = service.getUserById("testUserService@gmail.com");
-        assertEquals(null, userFromDb.getEmail());
+        service.getUserById(user1.getEmail());
     }
+
+    @Test (expected = UserAlreadyExists.class)
+    public void testCreateUserThatAlreadyExist() throws SQLException, UserAlreadyExists {
+        service.createUser(user1);
+    }
+
+
 
 }
