@@ -24,8 +24,8 @@ public class PlantProfileService implements IPlantProfileService {
     }
 
     @Override
-    public PlantProfile getPlantProfileById(String plantID) throws SQLException {
-        return dao.getPlantProfileById(plantID);
+    public PlantProfile getPlantProfileById(int profileID) throws SQLException {
+        return dao.getPlantProfileById(profileID);
     }
 
 
@@ -40,7 +40,7 @@ public class PlantProfileService implements IPlantProfileService {
 
 
     @Override
-    public void deletePlantProfile(String plantProfileID) throws SQLException {
+    public void deletePlantProfile(int plantProfileID) throws SQLException {
         dao.deletePlantProfile(plantProfileID);
     }
 

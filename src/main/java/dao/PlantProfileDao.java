@@ -111,7 +111,7 @@ public class PlantProfileDao {
 		);
 	}
 
-	public PlantProfile getPlantProfileById(int plantID) throws SQLException{
+	public PlantProfile getPlantProfileById(int profileId) throws SQLException{
 		return null;
 	}
 }
