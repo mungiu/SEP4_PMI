@@ -1,6 +1,7 @@
 package dao;
 
 import model.domain.IUser;
+import model.domain.User;
 import utils.Database;
 import utils.Queries;
 
@@ -37,6 +38,23 @@ public class UserDao {
     }
 
     public void createUser(IUser user) throws SQLException {
-        db.query(Queries.CREATE_USER, user.getEmail(), user.getPassword());
+        db.update(Queries.CREATE_USER, user.getEmail(), user.getPassword());
+    }
+    public void delete(String email) throws SQLException {
+        db.update(Queries.DELETE_USER, email);
+    }
+
+    public void updateUser(String email, IUser user) throws SQLException {
+        db.update(Queries.UPDATE_USER, user.getEmail(), user.getPassword(), email);
+    }
+
+    public IUser getUserByEmail(String email) throws SQLException {
+        ArrayList<Object[]> result = db.query(Queries.GET_USER, email);
+        IUser user = null;
+        if(result.size() == 1){
+            String password = result.get(0)[0].toString();
+            user = new User(email,password);
+        }
+        return user;
     }
 }

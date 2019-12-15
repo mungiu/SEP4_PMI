@@ -15,7 +15,6 @@ import java.sql.SQLException;
 import java.text.ParseException;
 
 public class UserService implements IUserService {
-    // TODO: What's that? This shouldn't be here.
     public PlantDao plantDao;
     public PlantProfileDao plantProfileDao;
     public UserDao userDao;
@@ -40,13 +39,13 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public void deleteUser(String userID) throws SQLException {
-        // TODO
+    public void deleteUser(String email) throws SQLException {
+        userDao.delete(email);
     }
 
     @Override
-    public void updateUser(IUser user) throws SQLException {
-        // TODO
+    public void updateUser(String email ,IUser user) throws SQLException {
+        userDao.updateUser(email, user);
     }
 
     @Override
@@ -72,4 +71,5 @@ public class UserService implements IUserService {
                 throw new UserNotFoundException();
             }
        }
+
 }

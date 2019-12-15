@@ -1,9 +1,11 @@
 package controller;
 
 import model.domain.IUser;
+import model.domain.Plant;
 import service.IUserService;
 import service.UserService;
 import utils.exceptions.InvalidPasswordException;
+import utils.exceptions.MissingDataException;
 import utils.exceptions.UserAlreadyExists;
 import utils.exceptions.UserNotFoundException;
 
@@ -60,6 +62,29 @@ public class UserController {
         } catch (SQLException | UserAlreadyExists e) {
             e.printStackTrace();
             return Response.status(500).entity(e).build();
+        }
+    }
+    @DELETE
+    @Path("/users/{email}")
+    public Response deleteUser(@PathParam("email") String email){
+        try{
+            iUserService.deleteUser(email);
+            return Response.status(200).build();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return Response.status(500).entity(e).build();
+        }
+    }
+    @PUT
+    @Path("/users/{email}")
+    public Response updateUser(@PathParam("email") String email, IUser user) {
+        try {
+            iUserService.updateUser(email, user);
+            return Response.status(200).build();
+        } catch (SQLException e){
+            e.printStackTrace();
+            return Response.status(500).entity(e.getMessage()).build();
         }
     }
 }

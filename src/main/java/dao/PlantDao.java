@@ -36,7 +36,7 @@ public class PlantDao {
      * @param plantID
      */
 
-    public void deletePlant(String plantID) throws SQLException {
+    public void deletePlant(int plantID) throws SQLException {
         db.update(Queries.DELETE_PLANT, plantID);
     }
 
@@ -100,7 +100,6 @@ public class PlantDao {
     private IPlant initializePlant(Object[] row) throws SQLException, ParseException {
         //p.Plant_ID, p.Profile_ID, p.PlantName, p.Device_ID
         int plantId = Integer.parseInt(row[0].toString());
-        // Todo: Add String deviceId = row[?].toString(); -> We need to retrieve id from the database
         int plantProfileId = Integer.parseInt(row[1].toString());
         String plantName = row[2].toString();
         String deviceID = row[3].toString();
@@ -111,7 +110,6 @@ public class PlantDao {
 
     private PlantData initializePlantData(Object[] lastRecord, int plantId) throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
         int plantDataId = Integer.parseInt(lastRecord[0].toString());
         SensorDataTypes sensorDataType = SensorDataTypes.valueOf(lastRecord[1].toString().toUpperCase());
         double sensorMeasurementValue = Double.parseDouble(lastRecord[2].toString());
@@ -120,7 +118,23 @@ public class PlantDao {
         return new PlantData(plantDataId, sensorMeasurementValue, sensorDataType, plantId, recordTimestamp);
     }
 
-    public IPlant getPlantById(String plantID) {
-        return null;
+    public IPlant getPlantById(int plantID) throws SQLException {
+        ArrayList<Object[]> result = db.query(Queries.GET_WEEKLY_AVG_VIEW_BY_PLANT, plantID);
+        Plant plant = null;
+        if(result.size() == 1){
+            String deviceId = result.get(0)[0].toString();
+            int profileId = Integer.parseInt(result.get(0)[1].toString());
+            String plantName = result.get(0)[2].toString();
+            double co2Value = Double.parseDouble(result.get(0)[3].toString());
+            double humidityValue = Double.parseDouble(result.get(0)[4].toString());
+            double temperatureValue = Double.parseDouble(result.get(0)[5].toString());
+            double lightValue = Double.parseDouble(result.get(0)[6].toString());
+            PlantData co2 = new PlantData(co2Value, SensorDataTypes.CO2, plantID);
+            PlantData humidity = new PlantData(humidityValue, SensorDataTypes.HUMIDITY, plantID);
+            PlantData temperature = new PlantData(temperatureValue, SensorDataTypes.TEMPERATURE, plantID);
+            PlantData light = new PlantData(lightValue, SensorDataTypes.LIGHT, plantID);
+            plant = new Plant(plantID,deviceId,plantName,profileId,co2,temperature,humidity,light);
+        }
+        return plant;
     }
 }
