@@ -46,7 +46,7 @@ public class PlantDao {
      * @param plant
      */
     public void updatePlant(IPlant plant) throws SQLException {
-        db.update(Queries.UPDATE_PLANT, plant.getDeviceId(), plant.getPlantProfileId(), plant.getPlantName(), plant.getDeviceId());
+        db.update(Queries.UPDATE_PLANT, plant.getDeviceId(), plant.getPlantProfileId(), plant.getPlantName(), plant.getPlantId());
     }
 
     /**

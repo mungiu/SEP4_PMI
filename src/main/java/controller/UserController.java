@@ -2,6 +2,7 @@ package controller;
 
 import model.domain.IUser;
 import model.domain.Plant;
+import model.domain.User;
 import service.IUserService;
 import service.UserService;
 import utils.exceptions.InvalidPasswordException;
@@ -33,15 +34,15 @@ public class UserController {
         try {
             IUser user = iUserService.getUserById(userId);
             return Response.status(200).entity(user).build();
-        } catch (SQLException | ParseException e) {
+        } catch (SQLException | ParseException | UserNotFoundException e) {
             e.printStackTrace();
-            return Response.status(500).build();
+            return Response.status(500).entity(e.getMessage()).build();
         }
     }
 
     @POST
     @Path("/login")
-    public Response login(IUser user){
+    public Response login(User user){
         try{
             boolean loginSucceed = iUserService.login(user);
             return Response.status(200).entity(loginSucceed).build();
@@ -53,15 +54,13 @@ public class UserController {
 
     @POST
     @Path("/users")
-    public Response createUser(IUser user){
+    public Response createUser(User user){
         try{
             boolean signUpSucceed = iUserService.createUser(user);
             return Response.status(200).entity(signUpSucceed).build();
-
-
-        } catch (SQLException | UserAlreadyExists e) {
+        } catch (SQLException | UserAlreadyExists | MissingDataException e) {
             e.printStackTrace();
-            return Response.status(500).entity(e).build();
+            return Response.status(500).entity(e.getMessage()).build();
         }
     }
     @DELETE
@@ -78,7 +77,7 @@ public class UserController {
     }
     @PUT
     @Path("/users/{email}")
-    public Response updateUser(@PathParam("email") String email, IUser user) {
+    public Response updateUser(@PathParam("email") String email, User user) {
         try {
             iUserService.updateUser(email, user);
             return Response.status(200).build();
