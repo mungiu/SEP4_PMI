@@ -32,7 +32,7 @@ public class PlantProfileController {
 			return Response.status(200).entity("Response from the getPlantProfileById method").build();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return Response.status(500).build();
+			return Response.status(500).entity(e.getMessage()).build();
 		}
 	}
 
@@ -77,7 +77,7 @@ public class PlantProfileController {
 			return Response.status(200).build();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return Response.status(500).entity(e).build();
+			return Response.status(500).entity(e.getMessage()).build();
 		}
 	}
 }
