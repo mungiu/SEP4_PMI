@@ -118,23 +118,50 @@ public class PlantDao {
         return new PlantData(plantDataId, sensorMeasurementValue, sensorDataType, plantId, recordTimestamp);
     }
 
-    public IPlant getPlantById(int plantID) throws SQLException {
-        ArrayList<Object[]> result = db.query(Queries.GET_WEEKLY_AVG_VIEW_BY_PLANT, plantID);
-        Plant plant = null;
-        if(result.size() == 1){
-            String deviceId = result.get(0)[0].toString();
-            int profileId = Integer.parseInt(result.get(0)[1].toString());
-            String plantName = result.get(0)[2].toString();
-            double co2Value = Double.parseDouble(result.get(0)[3].toString());
-            double humidityValue = Double.parseDouble(result.get(0)[4].toString());
-            double temperatureValue = Double.parseDouble(result.get(0)[5].toString());
-            double lightValue = Double.parseDouble(result.get(0)[6].toString());
-            PlantData co2 = new PlantData(co2Value, SensorDataTypes.CO2, plantID);
-            PlantData humidity = new PlantData(humidityValue, SensorDataTypes.HUMIDITY, plantID);
-            PlantData temperature = new PlantData(temperatureValue, SensorDataTypes.TEMPERATURE, plantID);
-            PlantData light = new PlantData(lightValue, SensorDataTypes.LIGHT, plantID);
-            plant = new Plant(plantID,deviceId,plantName,profileId,co2,temperature,humidity,light);
+    public WeeklyPlant getWeeklyPlantAvg(int plantID) throws SQLException {
+        PlantData[] co2 = getWeeklyCo2OfPlant(plantID);
+        PlantData[] humidity = getWeeklyHumidityOfPlant(plantID);
+        PlantData[] temperature = getWeeklyTemperatureOfPlant(plantID);
+        PlantData[] light = getWeeklyLightOfPlant(plantID);
+        WeeklyPlant weeklyPlant = new WeeklyPlant(co2,humidity,temperature,light);
+        return weeklyPlant;
+    }
+
+    private PlantData[] getWeeklyCo2OfPlant(int plantId) throws SQLException {
+        ArrayList<Object[]> result = db.query(Queries.GET_WEEKLY_CO2_AVG_OF_PLANT, plantId);
+        return initializeWeeklyPlantData(SensorDataTypes.CO2, result, plantId);
+    }
+
+    private PlantData[] getWeeklyHumidityOfPlant(int plantId) throws SQLException {
+        ArrayList<Object[]> result = db.query(Queries.GET_WEEKLY_HUMIDITY_AVG_OF_PLANT, plantId);
+        return initializeWeeklyPlantData(SensorDataTypes.HUMIDITY, result, plantId);
+    }
+
+    private PlantData[] getWeeklyTemperatureOfPlant(int plantId) throws SQLException{
+        ArrayList<Object[]> result = db.query(Queries.GET_WEEKLY_TEMPERATURE_AVG_OF_PLANT, plantId);
+        return initializeWeeklyPlantData(SensorDataTypes.TEMPERATURE, result, plantId);
+    }
+
+    private PlantData[] getWeeklyLightOfPlant(int plantId) throws SQLException{
+        ArrayList<Object[]> result = db.query(Queries.GET_WEEKLY_LIGHT_AVG_OF_PLANT, plantId);
+        return initializeWeeklyPlantData(SensorDataTypes.LIGHT, result, plantId);
+    }
+
+    private PlantData[] initializeWeeklyPlantData(SensorDataTypes type, ArrayList<Object[]> result, int plantId)  {
+        PlantData[] datas = new PlantData[7];
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        for(int i = 0; i < result.size() && i < 7; i++){
+            Date recordTimestamp = null;
+            try {
+                recordTimestamp = dateFormat.parse(result.get(i)[0].toString());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            double sensorMeasurementValue = Double.parseDouble(result.get(i)[1].toString());
+
+            PlantData data = new PlantData(sensorMeasurementValue,type,plantId,recordTimestamp);
+            datas[i] = data;
         }
-        return plant;
+        return datas;
     }
 }
