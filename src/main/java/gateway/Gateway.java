@@ -1,10 +1,12 @@
 package gateway;
 
-import java.net.http.WebSocket;
-
 public class Gateway {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         LoRaClient loRaClient = new LoRaClient();
+
+        while(true) {
+            Thread.sleep(5000);
+        }
 
     }
 }

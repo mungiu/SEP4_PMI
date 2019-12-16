@@ -1,13 +1,10 @@
 package gateway;
 
-import javax.validation.constraints.Null;
 import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.WebSocket;
+import java.net.http.*;
 import java.nio.ByteBuffer;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 
 public class LoRaClient implements WebSocket.Listener {
 
