@@ -3,7 +3,7 @@ package dao;
 import model.*;
 import model.domain.*;
 import utils.Database;
-import utils.Queries;
+import utils.queries.PlantProfileQueries;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ public class PlantProfileDao {
 	
 	public void createPlantProfile(IPlantProfile plantProfile) throws SQLException{
 		try {
-			db.update(Queries.CREATE_PLANT_PROFILE, plantProfile.getUserEmail(), plantProfile.getName(),
+			db.update(PlantProfileQueries.CREATE_PLANT_PROFILE, plantProfile.getUserEmail(), plantProfile.getName(),
 					plantProfile.getCo2Boundaries().getMax(), plantProfile.getCo2Boundaries().getMin(),
 					plantProfile.getHumidityBoundaries().getMax(), plantProfile.getHumidityBoundaries().getMin(),
 					plantProfile.getTemperatureBoundaries().getMax(), plantProfile.getTemperatureBoundaries().getMin(),
@@ -31,7 +31,7 @@ public class PlantProfileDao {
 
 	public PlantProfileList getPlantProfiles(String userId) throws SQLException {
 		try{
-			ArrayList<Object[]> result = db.query(Queries.GET_PLANT_PROFILES, userId);
+			ArrayList<Object[]> result = db.query(PlantProfileQueries.GET_PLANT_PROFILES, userId);
 			PlantProfileList profiles = new PlantProfileList();
 			for (Object[] row: result) {
 				/*"select PP.Profile_Name, "+
@@ -68,7 +68,7 @@ public class PlantProfileDao {
 	public void updatePlantProfile(PlantProfile plantProfile) throws SQLException{
 		// TODO Auto-generated method stub
 		try{
-			db.update(Queries.UPDATE_PLANT_PROFILE, plantProfile.getName(),
+			db.update(PlantProfileQueries.UPDATE_PLANT_PROFILE, plantProfile.getName(),
 					plantProfile.getCo2Boundaries().getMin(), plantProfile.getCo2Boundaries().getMax(),
 					plantProfile.getTemperatureBoundaries().getMin(),plantProfile.getTemperatureBoundaries().getMax(),
 					plantProfile.getHumidityBoundaries().getMin(), plantProfile.getHumidityBoundaries().getMax(),
@@ -80,7 +80,7 @@ public class PlantProfileDao {
 
 	public void deletePlantProfile(int plantProfileID) throws SQLException{
 		try{
-			db.update(Queries.DELETE_PLANT_PROFILE,plantProfileID);
+			db.update(PlantProfileQueries.DELETE_PLANT_PROFILE,plantProfileID);
 		}
 		catch (SQLException e ){
 			throw e;

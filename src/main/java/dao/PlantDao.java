@@ -5,7 +5,9 @@ import model.domain.IPlant;
 import model.domain.Plant;
 import model.PlantList;
 import utils.Database;
-import utils.Queries;
+import utils.queries.PlantDataQueries;
+import utils.queries.PlantQueries;
+import utils.queries.WeeklyPlantQueries;
 
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -27,7 +29,7 @@ public class PlantDao {
      */
 
     public void createPlant(IPlant plant) throws SQLException {
-        db.update(Queries.CREATE_PLANT, plant.getDeviceId(), plant.getPlantProfileId(), plant.getPlantName());
+        db.update(PlantQueries.CREATE_PLANT, plant.getDeviceId(), plant.getPlantProfileId(), plant.getPlantName());
     }
 
     /**
@@ -37,7 +39,7 @@ public class PlantDao {
      */
 
     public void deletePlant(int plantID) throws SQLException {
-        db.update(Queries.DELETE_PLANT, plantID);
+        db.update(PlantQueries.DELETE_PLANT, plantID);
     }
 
     /**
@@ -46,14 +48,14 @@ public class PlantDao {
      * @param plant
      */
     public void updatePlant(IPlant plant) throws SQLException {
-        db.update(Queries.UPDATE_PLANT, plant.getDeviceId(), plant.getPlantProfileId(), plant.getPlantName(), plant.getPlantId());
+        db.update(PlantQueries.UPDATE_PLANT, plant.getDeviceId(), plant.getPlantProfileId(), plant.getPlantName(), plant.getPlantId());
     }
 
     /**
      * Get all plants from the database
      */
     public PlantList getPlants(String userEmail) throws SQLException {
-            ArrayList<Object[]> queryResults = db.query(Queries.GET_PLANTS_BY_USER_ID, userEmail);
+            ArrayList<Object[]> queryResults = db.query(PlantQueries.GET_PLANTS_BY_USER_ID, userEmail);
             PlantList plantList = new PlantList();
 
         try {
@@ -78,7 +80,7 @@ public class PlantDao {
         PlantData[] plantData = new PlantData[4];
 
         for (int i = 0; i < 4; i++) {
-            ArrayList<Object[]> results = db.query(Queries.GET_PLANT_DATA_BY_TYPE_AND_PLANT_ID, typesInOrder[i].getValue(), plantId);
+            ArrayList<Object[]> results = db.query(PlantDataQueries.GET_PLANT_DATA_BY_TYPE_AND_PLANT_ID, typesInOrder[i].getValue(), plantId);
 
             if (!results.isEmpty()) {
                 Object[] lastRecord = results.get(0);
@@ -128,22 +130,22 @@ public class PlantDao {
     }
 
     private PlantData[] getWeeklyCo2OfPlant(int plantId) throws SQLException {
-        ArrayList<Object[]> result = db.query(Queries.GET_WEEKLY_CO2_AVG_OF_PLANT, plantId);
+        ArrayList<Object[]> result = db.query(WeeklyPlantQueries.GET_WEEKLY_CO2_AVG_OF_PLANT, plantId);
         return initializeWeeklyPlantData(SensorDataTypes.CO2, result, plantId);
     }
 
     private PlantData[] getWeeklyHumidityOfPlant(int plantId) throws SQLException {
-        ArrayList<Object[]> result = db.query(Queries.GET_WEEKLY_HUMIDITY_AVG_OF_PLANT, plantId);
+        ArrayList<Object[]> result = db.query(WeeklyPlantQueries.GET_WEEKLY_HUMIDITY_AVG_OF_PLANT, plantId);
         return initializeWeeklyPlantData(SensorDataTypes.HUMIDITY, result, plantId);
     }
 
     private PlantData[] getWeeklyTemperatureOfPlant(int plantId) throws SQLException{
-        ArrayList<Object[]> result = db.query(Queries.GET_WEEKLY_TEMPERATURE_AVG_OF_PLANT, plantId);
+        ArrayList<Object[]> result = db.query(WeeklyPlantQueries.GET_WEEKLY_TEMPERATURE_AVG_OF_PLANT, plantId);
         return initializeWeeklyPlantData(SensorDataTypes.TEMPERATURE, result, plantId);
     }
 
     private PlantData[] getWeeklyLightOfPlant(int plantId) throws SQLException{
-        ArrayList<Object[]> result = db.query(Queries.GET_WEEKLY_LIGHT_AVG_OF_PLANT, plantId);
+        ArrayList<Object[]> result = db.query(WeeklyPlantQueries.GET_WEEKLY_LIGHT_AVG_OF_PLANT, plantId);
         return initializeWeeklyPlantData(SensorDataTypes.LIGHT, result, plantId);
     }
 
