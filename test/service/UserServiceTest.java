@@ -42,7 +42,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testChangePassword() throws SQLException, UserNotFoundException, InvalidPasswordException {
+    public void testChangePassword() throws SQLException, UserNotFoundException, InvalidPasswordException, MissingDataException {
         user1.setPassword("ChangedPassword");
         service.updateUser("testUserService@gmail.com", user1);
         assertEquals(true, service.login(user1));

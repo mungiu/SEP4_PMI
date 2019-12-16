@@ -49,8 +49,11 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public void updateUser(String email ,IUser user) throws SQLException {
-        userDao.updateUser(email, user);
+    public void updateUser(String email ,IUser user) throws SQLException, MissingDataException {
+        if(isValid(user)){
+            userDao.updateUser(email, user);
+        }
+        else throw new MissingDataException("Please fill out the form with valid information");
     }
 
     @Override

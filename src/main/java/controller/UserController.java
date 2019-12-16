@@ -48,7 +48,7 @@ public class UserController {
             return Response.status(200).entity(loginSucceed).build();
         }catch (SQLException | InvalidPasswordException | UserNotFoundException e){
             e.printStackTrace();
-            return Response.status(500).entity(e).build();
+            return Response.status(500).entity(e.getMessage()).build();
         }
     }
 
@@ -81,7 +81,7 @@ public class UserController {
         try {
             iUserService.updateUser(email, user);
             return Response.status(200).build();
-        } catch (SQLException e){
+        } catch (SQLException | MissingDataException e){
             e.printStackTrace();
             return Response.status(500).entity(e.getMessage()).build();
         }
