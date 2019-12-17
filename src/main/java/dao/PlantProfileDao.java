@@ -70,8 +70,8 @@ public class PlantProfileDao {
 		try{
 			db.update(PlantProfileQueries.UPDATE_PLANT_PROFILE, plantProfile.getName(),
 					plantProfile.getCo2Boundaries().getMin(), plantProfile.getCo2Boundaries().getMax(),
-					plantProfile.getTemperatureBoundaries().getMin(),plantProfile.getTemperatureBoundaries().getMax(),
 					plantProfile.getHumidityBoundaries().getMin(), plantProfile.getHumidityBoundaries().getMax(),
+					plantProfile.getTemperatureBoundaries().getMin(),plantProfile.getTemperatureBoundaries().getMax(),
 					plantProfile.getLightBoundaries().getMin(), plantProfile.getLightBoundaries().getMax(), plantProfile.getId());
 		}catch (SQLException e){
 			throw e;
