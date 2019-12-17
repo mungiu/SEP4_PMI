@@ -1,3 +1,5 @@
+package dao;
+
 import dao.PlantDao;
 import dao.PlantProfileDao;
 import dao.UserDao;
