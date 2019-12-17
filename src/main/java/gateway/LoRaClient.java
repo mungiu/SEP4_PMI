@@ -1,17 +1,28 @@
 package gateway;
 
+import dao.PlantDataDao;
+import model.PlantData;
+import service.IPlantDataService;
+import service.PlantDataService;
+
 import java.net.URI;
 import java.net.http.*;
 import java.nio.ByteBuffer;
+import java.text.ParseException;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.CompletableFuture;
 
 public class LoRaClient implements WebSocket.Listener {
+    private IPlantDataService plantDataService;
+    private PlantDataDao plantDataDao;
 
     public LoRaClient() {
         HttpClient client = HttpClient.newHttpClient();
         CompletableFuture<WebSocket> ws = client.newWebSocketBuilder()
                 .buildAsync(URI.create("wss://iotnet.teracom.dk/app?token=vnoSZgAAABFpb3RuZXQudGVyYWNvbS5ka5UP5XduzFukz7WTiUm9E-I="), this);
+
+        plantDataService = new PlantDataService();
+        plantDataDao = new PlantDataDao();
     }
 
     //onOpen()
@@ -53,7 +64,18 @@ public class LoRaClient implements WebSocket.Listener {
 
     //onText()
     public CompletionStage<?> onText​(WebSocket webSocket, CharSequence data, boolean last) {
-        System.out.println(data);
+        System.out.println("Data received");
+        PlantData[] plantDataArray;
+
+        try {
+            plantDataArray = plantDataService.serializePlantDataFromJSON(data);
+            if (plantDataArray != null)
+                plantDataDao.addPlantDatas(plantDataArray);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            System.out.println("Error while parsing data from a device");
+        }
+
         webSocket.request(1);
         return  CompletableFuture.completedFuture("onText() completed.").thenAccept(System.out::println);
     };

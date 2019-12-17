@@ -15,4 +15,8 @@ public class PlantDataDao {
 
     }
 
+    public int getPlantIdByDeviceId(String deviceId) {
+        return -1;
+    }
+
 }
