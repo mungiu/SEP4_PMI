@@ -1,5 +1,6 @@
 package controller;
 
+import model.WeeklyPlant;
 import model.domain.IPlant;
 import model.domain.Plant;
 import service.IPlantService;
@@ -33,8 +34,8 @@ public class PlantController {
 	@Path("/plants/{plantID}")
 	public Response getPlantByIdWIthWeekAvg(@PathParam("plantID") int plantID) {
 		try {
-			IPlant plant = iPlantService.getPlantById(plantID);
-			return Response.status(200).entity(plant).build();
+			WeeklyPlant weeklyPlant = iPlantService.getPlantById(plantID);
+			return Response.status(200).entity(weeklyPlant).build();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return Response.status(500).entity(e.getMessage()).build();
@@ -88,7 +89,7 @@ public class PlantController {
 			return Response.status(200).build();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return Response.status(500).entity(e).build();
+			return Response.status(500).entity(e.getMessage()).build();
 		}
 	}
 }

@@ -17,7 +17,6 @@ public class PlantDaoTest {
     private UserDao userDao;
     private PlantProfileDao profileDao;
     private IPlant createdPlant;
-    private IPlantProfile profile;
     private PlantProfileList profileList;
     private PlantList plantList;
     private final IUser USER  = new User("IamATestUser@never.com", "1234567890");
@@ -96,6 +95,8 @@ public class PlantDaoTest {
         assertEquals(1, plantList.size());
     }
 
+
+
     private void setUpUser() throws SQLException {
         userDao = new UserDao();
         userDao.createUser(USER);
@@ -103,7 +104,7 @@ public class PlantDaoTest {
 
     private void setUpProfiles() throws SQLException {
         SensorBoundaries boundaries = new SensorBoundaries(1.0, 2.0);
-        profile = new PlantProfile("MyPPNameISSSSSSSomething" , "IamATestUser@never.com", boundaries,boundaries,boundaries,boundaries);
+        IPlantProfile profile = new PlantProfile("MyPPNameISSSSSSSomething", "IamATestUser@never.com", boundaries, boundaries, boundaries, boundaries);
         profileDao.createPlantProfile(profile);
         profileList = profileDao.getPlantProfiles("IamATestUser@never.com");
     }

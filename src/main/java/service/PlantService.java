@@ -1,9 +1,12 @@
 package service;
 
 import dao.PlantDao;
+import model.WeeklyPlant;
 import model.domain.IPlant;
+import utils.exceptions.MissingDataException;
 
 import java.sql.SQLException;
+import java.text.ParseException;
 
 public class PlantService implements IPlantService {
 
@@ -20,17 +23,20 @@ public class PlantService implements IPlantService {
      * @throws SQLException
      */
     @Override
-    public IPlant getPlantById(int plantID) throws SQLException {
-        return dao.getPlantById(plantID);
+    public WeeklyPlant getPlantById(int plantID) throws SQLException {
+        return dao.getWeeklyPlantAvg(plantID);
     }
 
     /**
      * todo
      */
-    public void createPlant(IPlant plant) throws SQLException {
+    public void createPlant(IPlant plant) throws SQLException, MissingDataException {
     	if(isValid(plant))
         {
             dao.createPlant(plant);
+        }
+    	else {
+    	    throw new MissingDataException("Please fill out the form");
         }
     }
 
@@ -38,10 +44,13 @@ public class PlantService implements IPlantService {
      * todo
      */
     @Override
-    public void updatePlant(IPlant plant) throws SQLException {
+    public void updatePlant(IPlant plant) throws SQLException, MissingDataException {
     	if(isValid(plant))
     	{
             dao.updatePlant(plant);
+        }
+    	else {
+    	    throw new MissingDataException("Please fill out the form");
         }
     }
 

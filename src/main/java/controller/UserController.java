@@ -72,7 +72,7 @@ public class UserController {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            return Response.status(500).entity(e).build();
+            return Response.status(500).entity(e.getMessage()).build();
         }
     }
     @PUT
