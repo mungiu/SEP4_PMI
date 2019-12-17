@@ -7,5 +7,6 @@ public class PlantQueries {
     "WHERE Email = ?;";
     public static final String CREATE_PLANT = "insert into SEP4_PMI.dbo.Plant([Device_ID] ,Profile_ID, PlantName) values (?,?,?);";
     public static final String UPDATE_PLANT = "update SEP4_PMI.dbo.Plant set Device_ID = ?, Profile_ID = ?, PlantName = ? where Plant_ID = ?;";
-    public static final String DELETE_PLANT = "  delete from SEP4_PMI.dbo.Plant where Plant_ID = ?;";
+    public static final String DELETE_PLANT = "delete from SEP4_PMI.dbo.Plant where Plant_ID = ?;";
+    public static final String GET_PLANT_ID_BY_DEVICE_ID = "SELECT PLANT_ID FROM SEP4_PMI.dbo.Plant WHERE Device_ID = ?";
 }

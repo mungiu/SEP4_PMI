@@ -4,6 +4,9 @@ import model.PlantData;
 import model.SensorDataTypes;
 import dao.PlantDataDao;
 import org.json.JSONObject;
+import utils.exceptions.PlantNotFoundException;
+
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -12,7 +15,7 @@ import java.util.Date;
 public class PlantDataService implements IPlantDataService {
 
     @Override
-    public PlantData[] serializePlantDataFromJSON(CharSequence data) throws ParseException {
+    public PlantData[] serializePlantDataFromJSON(CharSequence data) throws ParseException, PlantNotFoundException, SQLException {
         // TODO: This could be extracted as a single CONST which is used all over the application
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
