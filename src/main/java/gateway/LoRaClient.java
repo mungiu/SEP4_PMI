@@ -1,8 +1,14 @@
 package gateway;
 
+import dao.PlantDataDao;
+import model.PlantData;
+import service.IPlantDataService;
+import service.PlantDataService;
+
 import java.net.URI;
 import java.net.http.*;
 import java.nio.ByteBuffer;
+import java.text.ParseException;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.CompletableFuture;
 
@@ -53,7 +59,19 @@ public class LoRaClient implements WebSocket.Listener {
 
     //onText()
     public CompletionStage<?> onText​(WebSocket webSocket, CharSequence data, boolean last) {
-        System.out.println(data);
+        IPlantDataService plantDataService = new PlantDataService();
+        PlantDataDao plantDataDao = new PlantDataDao();
+        PlantData[] plantDataArray;
+
+        try {
+            plantDataArray = plantDataService.serializePlantDataFromJSON(data);
+            if (plantDataArray != null)
+                plantDataDao.addPlantDatas(plantDataArray);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            System.out.println("Error while parsing data from a device");
+        }
+
         webSocket.request(1);
         return  CompletableFuture.completedFuture("onText() completed.").thenAccept(System.out::println);
     };
