@@ -11,7 +11,7 @@ public class PlantDataDao {
         db = Database.getInstance();
     }
 
-    public void addPlantDatas(PlantData[] datas, String deviceId) {
+    public void addPlantDatas(PlantData[] datas) {
 
     }
 
