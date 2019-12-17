@@ -65,7 +65,7 @@ public class PlantProfileDao {
 		}
 	}
 
-	public void updatePlantProfile(PlantProfile plantProfile) throws SQLException{
+	public void updatePlantProfile(IPlantProfile plantProfile) throws SQLException{
 		// TODO Auto-generated method stub
 		try{
 			db.update(PlantProfileQueries.UPDATE_PLANT_PROFILE, plantProfile.getName(),
