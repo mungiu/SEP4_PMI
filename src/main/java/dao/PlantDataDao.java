@@ -19,7 +19,7 @@ public class PlantDataDao {
 
     public void addPlantDatas(PlantData[] datas) throws SQLException {
         for (PlantData data:datas) {
-            db.update(PlantDataQueries.CREATE_PLANT_DATA, data.getId(), data.getSensorDataType().getValue(), data.getMeasurementValue(), data.getMeasurementTimestamp());
+            db.update(PlantDataQueries.CREATE_PLANT_DATA, data.getPlantId(), data.getSensorDataType().getValue(), data.getMeasurementValue(), data.getMeasurementTimestamp());
         }
     }
 
