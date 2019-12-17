@@ -13,11 +13,16 @@ import java.util.concurrent.CompletionStage;
 import java.util.concurrent.CompletableFuture;
 
 public class LoRaClient implements WebSocket.Listener {
+    private IPlantDataService plantDataService;
+    private PlantDataDao plantDataDao;
 
     public LoRaClient() {
         HttpClient client = HttpClient.newHttpClient();
         CompletableFuture<WebSocket> ws = client.newWebSocketBuilder()
                 .buildAsync(URI.create("wss://iotnet.teracom.dk/app?token=vnoSZgAAABFpb3RuZXQudGVyYWNvbS5ka5UP5XduzFukz7WTiUm9E-I="), this);
+
+        plantDataService = new PlantDataService();
+        plantDataDao = new PlantDataDao();
     }
 
     //onOpen()
@@ -59,8 +64,7 @@ public class LoRaClient implements WebSocket.Listener {
 
     //onText()
     public CompletionStage<?> onText​(WebSocket webSocket, CharSequence data, boolean last) {
-        IPlantDataService plantDataService = new PlantDataService();
-        PlantDataDao plantDataDao = new PlantDataDao();
+        System.out.println("Data received");
         PlantData[] plantDataArray;
 
         try {

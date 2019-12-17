@@ -17,12 +17,12 @@ public class PlantDataService implements IPlantDataService {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         JSONObject jsonObject = new JSONObject(data.toString());
-        String timestamp = jsonObject.opt("ts").toString();
+        String timestampInMilliseconds = jsonObject.opt("ts").toString();
         String deviceId = jsonObject.opt("EUI").toString();
         String hexString = jsonObject.opt("data").toString();
 
-        if (timestamp != null && deviceId != null && hexString != null) {
-            Date date = dateFormat.parse(timestamp);
+        if (timestampInMilliseconds != null && deviceId != null && hexString != null) {
+            Date date = new Date(Long.parseLong(timestampInMilliseconds));
             int plantId = new PlantDataDao().getPlantIdByDeviceId(deviceId);
             int humidity = Integer.parseInt(hexString.substring(0, 4), 16);
             int temperature = Integer.parseInt(hexString.substring(4, 8), 16);
