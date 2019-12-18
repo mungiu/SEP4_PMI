@@ -45,12 +45,12 @@ public class UserServiceTest {
     public void testChangePassword() throws SQLException, UserNotFoundException, InvalidPasswordException, MissingDataException {
         user1.setPassword("ChangedPassword");
         service.updateUser("testUserService@gmail.com", user1);
-        assertEquals(true, service.login(user1));
+        assertTrue(service.login(user1));
     }
 
     @Test
     public void testLoginSucceed() throws SQLException, UserNotFoundException, InvalidPasswordException {
-        assertEquals(true, service.login(user1));
+        assertTrue(service.login(user1));
     }
 
     @Test (expected = UserNotFoundException.class)
@@ -85,13 +85,13 @@ public class UserServiceTest {
 
     @Test (expected = MissingDataException.class)
     public void testCreateUserWithMissingEmail() throws MissingDataException, SQLException, UserAlreadyExists {
-        userCreate.setPassword("");
+        userCreate.setEmail("");
         service.createUser(userCreate);
     }
 
     @Test (expected = MissingDataException.class)
     public void testCreateUserWithMissingPassword() throws MissingDataException, SQLException, UserAlreadyExists {
-        userCreate.setEmail("");
+        userCreate.setPassword("");
         service.createUser(userCreate);
     }
 
