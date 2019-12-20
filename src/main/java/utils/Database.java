@@ -11,7 +11,6 @@ public class Database {
     private static Connection connection;
     private static Database instance;
 
-    // TODO: Why do we need a private Database constructor?
     /**
      * private Database constructor
      *
@@ -20,7 +19,6 @@ public class Database {
     private Database() {
     }
 
-    // TODO: This should be a singleton like instantiation of a database
     // If a connection already exist, return it, else create a new connection.
     // Does it make sense to close the database connection after every request?
     /**
@@ -30,8 +28,9 @@ public class Database {
      */
     public static Database getInstance() {
         if (instance == null) {
-            return new Database();
-        } else return instance;
+            instance = new Database();
+        }
+        return instance;
     }
 
     /**
@@ -39,7 +38,7 @@ public class Database {
      *
      * @return connection
      */
-    public static Connection getNewConnection() {
+    private static Connection getNewConnection() {
         try {
             connection = DriverManager.getConnection(DatabaseData.MY_SQL_URL, DatabaseData.DB_USERNAME, DatabaseData.DB_PASSWORD);
 
@@ -51,12 +50,10 @@ public class Database {
     }
 
     public ArrayList<Object[]> query(String sql, Object... statementElements) throws SQLException {
-        // TODO: Why do we use getNewConnection?
         getNewConnection();
         PreparedStatement statement = null;
         ArrayList<Object[]> list = null;
         ResultSet resultSet = null;
-        // TODO: IntelliJ is complaining that the statement is always true
         if (sql != null && statement == null) {
             statement = connection.prepareStatement(sql);
             if (statementElements != null) {
@@ -73,10 +70,8 @@ public class Database {
             }
             list.add(row);
         }
-        // TODO: IntelliJ is complaining that the statement is always true
         if (resultSet != null)
             resultSet.close();
-        // TODO: IntelliJ is complaining that the statement is always true
         if (statement != null)
             statement.close();
         closeDatabase();
@@ -97,7 +92,7 @@ public class Database {
         return result;
     }
 
-    public void closeDatabase() throws SQLException {
+    private void closeDatabase() throws SQLException {
         connection.close();
     }
 }

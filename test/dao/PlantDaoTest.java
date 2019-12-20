@@ -1,8 +1,6 @@
 package dao;
 
-import model.PlantList;
-import model.PlantProfileList;
-import model.SensorBoundaries;
+import model.*;
 import model.domain.*;
 import org.junit.After;
 import org.junit.Assert;
@@ -11,9 +9,13 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class PlantDaoTest {
     private PlantDao dao;
+    private PlantDataDao dataDao;
     private UserDao userDao;
     private PlantProfileDao profileDao;
     private IPlant createdPlant;
@@ -21,10 +23,12 @@ public class PlantDaoTest {
     private PlantList plantList;
     private final IUser USER  = new User("IamATestUser@never.com", "1234567890");
     private final String EMAIL = "IamATestUser@never.com";
+    private final double DELTA = 0.1;
 
     @Before
     public void setUp() throws SQLException {
         dao = new PlantDao();
+        dataDao = new PlantDataDao();
         profileDao = new PlantProfileDao();
         setUpUser();
         setUpProfiles();
@@ -45,6 +49,26 @@ public class PlantDaoTest {
         plantList = dao.getPlants(EMAIL);
         assertNotEquals(null, findPlant(newPlant));
     }
+
+    @Test
+    public void testAddPlantDatas() throws SQLException {
+        PlantData[] datas = new PlantData[4];
+        datas[0] = new PlantData(43, SensorDataTypes.CO2,createdPlant.getPlantId(), new Date(1677189999));
+        datas[1] = new PlantData(20, SensorDataTypes.HUMIDITY,createdPlant.getPlantId(), new Date(1677189999));
+        datas[2] = new PlantData(23, SensorDataTypes.TEMPERATURE,createdPlant.getPlantId(), new Date(1677189999));
+        datas[3] = new PlantData(100, SensorDataTypes.LIGHT,createdPlant.getPlantId(), new Date(1677189999));
+        dataDao.addPlantDatas(datas);
+        plantList = dao.getPlants(EMAIL);
+        for (IPlant plant:plantList.getPlants()) {
+            if(plant.getPlantId() == createdPlant.getPlantId()){
+                assertEquals(43, plant.getLastCO2Measurement().getMeasurementValue(),DELTA);
+                assertEquals(20, plant.getLastHumidityMeasurement().getMeasurementValue(), DELTA);
+                assertEquals(23, plant.getLastTemperatureMeasurement().getMeasurementValue(),DELTA);
+                assertEquals(100, plant.getLastLightMeasurement().getMeasurementValue(),DELTA);
+            }
+        }
+    }
+
 
     @Test
     public void testDeletePlant() throws SQLException {

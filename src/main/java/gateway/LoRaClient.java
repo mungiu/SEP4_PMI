@@ -4,10 +4,12 @@ import dao.PlantDataDao;
 import model.PlantData;
 import service.IPlantDataService;
 import service.PlantDataService;
+import utils.exceptions.PlantNotFoundException;
 
 import java.net.URI;
 import java.net.http.*;
 import java.nio.ByteBuffer;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.CompletableFuture;
@@ -74,6 +76,10 @@ public class LoRaClient implements WebSocket.Listener {
         } catch (ParseException e) {
             e.printStackTrace();
             System.out.println("Error while parsing data from a device");
+        } catch (SQLException e){
+            e.printStackTrace();
+        }catch (PlantNotFoundException e){
+            System.err.println(e.getMessage());
         }
 
         webSocket.request(1);
